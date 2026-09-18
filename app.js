@@ -84,7 +84,17 @@
   }
 
   function fillSelect(select, items, value) {
+    items = items || [];
+    var hasSkip = items.some(function (item) {
+      return item.id === "none" || item.id === "";
+    });
     select.innerHTML = "";
+    if (!hasSkip) {
+      var skipOpt = document.createElement("option");
+      skipOpt.value = "";
+      skipOpt.textContent = "-";
+      select.appendChild(skipOpt);
+    }
     var grouped = items.some(function (item) {
       return item.group;
     });
@@ -114,9 +124,57 @@
         select.appendChild(option);
       });
     }
-    if (value && items.some(function (item) { return item.id === value; })) {
-      select.value = value;
+    var match = Array.prototype.some.call(select.options, function (opt) {
+      return opt.value === String(value);
+    });
+    if (match) select.value = String(value);
+  }
+
+  function blankSelect(select) {
+    if (!select || select.tagName !== "SELECT") return;
+    var hasNone = Array.prototype.some.call(select.options, function (opt) {
+      return opt.value === "none";
+    });
+    if (hasNone) {
+      select.value = "none";
+      return;
     }
+    var hasDash = Array.prototype.some.call(select.options, function (opt) {
+      return opt.value === "";
+    });
+    if (hasDash) {
+      select.value = "";
+      return;
+    }
+    select.selectedIndex = 0;
+  }
+
+  function isKeptSelectValue(current, options, select) {
+    if (current === "none" && options.some(function (item) { return item.id === "none"; })) return true;
+    if (current === "") {
+      return !!(select && Array.prototype.some.call(select.options, function (opt) {
+        return opt.value === "";
+      }));
+    }
+    return options.some(function (item) {
+      return item.id === current;
+    });
+  }
+
+  function resetFields() {
+    document.querySelectorAll("#builder input, #builder select, #builder textarea, #idea, #splitNodes").forEach(function (node) {
+      if (!node.id || node.id === "medium" || node.id === "kind" || node.id === "presetName") return;
+      if (node.type === "checkbox") {
+        node.checked = false;
+        return;
+      }
+      if (node.tagName === "SELECT") {
+        blankSelect(node);
+        return;
+      }
+      node.value = "";
+    });
+    render();
   }
 
   function val(id) {
@@ -257,7 +315,7 @@
   function syncFormatSelect() {
     var current = val("format");
     var options = formatOptions();
-    var keep = options.some(function (item) { return item.id === current; })
+    var keep = isKeptSelectValue(current, options, el("format"))
       ? current
       : defaultFormatForMedium(val("medium"));
     fillSelect(el("format"), options, keep);
@@ -266,7 +324,7 @@
   function syncHeadcountSelect() {
     var current = val("headcount");
     var options = headcountOptions();
-    var keep = options.some(function (item) { return item.id === current; }) ? current : "1";
+    var keep = isKeptSelectValue(current, options, el("headcount")) ? current : "1";
     fillSelect(el("headcount"), options, keep);
   }
 
@@ -804,6 +862,7 @@
       el("medium").dispatchEvent(new Event("change"));
     });
     el("savePreset").addEventListener("click", savePreset);
+    el("resetFields").addEventListener("click", resetFields);
     var donateBar = el("donateBar");
     if (donateBar) {
       donateBar.addEventListener("click", function (event) {

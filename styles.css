@@ -276,6 +276,17 @@ h1 {
   margin-bottom: 0.75rem;
 }
 
+.section-head-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.section-head-tools .ghost {
+  padding: 0.35rem 0.65rem;
+  font-size: 11px;
+}
+
 .section-head h2 {
   margin: 0;
   font-size: 18px;

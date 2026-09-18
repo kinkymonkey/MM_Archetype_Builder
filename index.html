@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0&amp;display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=live2" />
+    <link rel="stylesheet" href="styles.css?v=live3" />
   </head>
   <body>
     <header class="top">
@@ -51,7 +51,10 @@
       <form class="lexicon" id="builder" autocomplete="off">
         <div class="section-head">
           <h2><span class="mi" aria-hidden="true">tune</span>Controls</h2>
-          <span class="meta">Dropdowns stitch the prompt</span>
+          <div class="section-head-tools">
+            <span class="meta">Dropdowns stitch the prompt</span>
+            <button type="button" class="ghost" id="resetFields">Reset</button>
+          </div>
         </div>
         <div class="row">
           <label class="stack">
@@ -526,6 +529,6 @@
     </div>
 
     <script src="stitch.js"></script>
-    <script src="app.js?v=live2"></script>
+    <script src="app.js?v=live3"></script>
   </body>
 </html>
