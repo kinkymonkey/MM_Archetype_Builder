@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Midnight Majestic Archetype Builder v1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=live2" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand">
+        <h1><span class="mi" aria-hidden="true">auto_awesome</span>Midnight Majestic Archetype Builder</h1>
+        <span class="badge">v1</span>
+      </div>
+      <div class="top-actions">
+        <span class="brand-mark">Midnight Majestic</span>
+        <div id="donateBar" class="donate-bar" hidden>
+          <span>Support the house</span>
+          <button type="button" class="donate" data-amount="5">$5</button>
+          <button type="button" class="donate" data-amount="10">$10</button>
+          <button type="button" class="donate" data-amount="20">$20</button>
+        </div>
+      </div>
+    </header>
+
+    <p id="bootError" class="error" hidden></p>
+    <p id="videoNote" class="note" hidden>
+      Set the same duration and aspect ratio in the video tool. The prompt names the look; the platform still needs those numbers.
+    </p>
+
+    <div class="workbench">
+      <div class="status">
+        <div class="status-live">
+          <span class="pulse" aria-hidden="true"></span>
+          <span>Prompt rig</span>
+          <span>/</span>
+          <em id="statusKind">Character</em>
+          <span>·</span>
+          <em id="statusReady">Ready</em>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Medium">
+          <button type="button" class="tab on" id="tabImage" data-medium="image">Image</button>
+          <button type="button" class="tab" id="tabVideo" data-medium="video">Video</button>
+        </div>
+      </div>
+
+      <form class="lexicon" id="builder" autocomplete="off">
+        <div class="section-head">
+          <h2><span class="mi" aria-hidden="true">tune</span>Controls</h2>
+          <span class="meta">Dropdowns stitch the prompt</span>
+        </div>
+        <div class="row">
+          <label class="stack">
+            <span>Medium</span>
+            <select id="medium">
+              <option value="image">Image</option>
+              <option value="video">Video</option>
+            </select>
+          </label>
+          <label class="stack">
+            <span>Kind</span>
+            <select id="kind">
+              <option value="character">Character</option>
+              <option value="scene">Scene</option>
+              <option value="prop">Prop</option>
+              <option value="location">Location</option>
+            </select>
+          </label>
+        </div>
+
+        <fieldset class="mod mod-craft">
+          <legend><span class="mi" aria-hidden="true">photo_camera</span>Craft</legend>
+          <div class="grid">
+            <label class="stack">
+              <span>Format</span>
+              <select id="format"></select>
+            </label>
+            <label class="stack">
+              <span>Size</span>
+              <select id="size"></select>
+            </label>
+            <label class="stack">
+              <span>Shot framing</span>
+              <select id="crop"></select>
+            </label>
+            <label class="stack">
+              <span>Body view</span>
+              <select id="angle"></select>
+            </label>
+            <label class="stack">
+              <span>Camera angle</span>
+              <select id="cameraAngle"></select>
+            </label>
+            <label class="stack">
+              <span>Camera</span>
+              <select id="camera"></select>
+            </label>
+            <label class="stack">
+              <span>Lens</span>
+              <select id="lens"></select>
+            </label>
+            <label class="stack">
+              <span>Depth of field</span>
+              <select id="dof"></select>
+            </label>
+            <label class="stack">
+              <span>Lighting</span>
+              <select id="lighting"></select>
+            </label>
+            <label class="stack">
+              <span>Colour temperature</span>
+              <select id="colorTemp"></select>
+            </label>
+            <label class="stack">
+              <span>Colour grade</span>
+              <select id="colorGrade"></select>
+            </label>
+            <label class="stack" id="studioBgSelectRow">
+              <span>Background</span>
+              <select id="studioBackground"></select>
+            </label>
+            <label class="stack">
+              <span>Aesthetic &amp; genre</span>
+              <select id="style"></select>
+            </label>
+            <label class="stack">
+              <span>Headcount</span>
+              <select id="headcount"></select>
+            </label>
+          </div>
+          <label class="stack" id="studioBgNoteRow">
+            <span>Background extra</span>
+            <input id="backgroundNote" type="text" placeholder="Optional. Example: faint floor shadow only" />
+          </label>
+          <label class="check">
+            <input type="checkbox" id="bindRef" />
+            Bind a reference placeholder
+          </label>
+        </fieldset>
+
+        <fieldset class="mod mod-surface">
+          <legend><span class="mi" aria-hidden="true">palette</span>Color, material &amp; texture</legend>
+          <div class="grid">
+            <label class="stack">
+              <span>Color palette</span>
+              <select id="colorPalette"></select>
+            </label>
+            <label class="stack">
+              <span>Material &amp; fabric</span>
+              <select id="surfaceMaterial"></select>
+            </label>
+            <label class="stack">
+              <span>Surface finish</span>
+              <select id="surfaceFinish"></select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="mod mod-place">
+          <legend><span class="mi" aria-hidden="true">landscape</span>Environment &amp; background</legend>
+          <div class="grid">
+            <label class="stack">
+              <span>Setting</span>
+              <select id="settingType"></select>
+            </label>
+            <label class="stack">
+              <span>Weather &amp; time</span>
+              <select id="weatherTime"></select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="mod mod-identity" id="identityFields">
+          <legend><span class="mi" aria-hidden="true">person</span>Subject &amp; identity</legend>
+          <div class="grid">
+            <label class="stack">
+              <span>Entity type</span>
+              <select id="entityType"></select>
+            </label>
+            <label class="stack">
+              <span>Name</span>
+              <input id="name" type="text" placeholder="Optional" />
+            </label>
+          </div>
+          <div id="livingFields" class="grid">
+            <label class="stack">
+              <span>Gender / presentation</span>
+              <select id="sex"></select>
+            </label>
+            <label class="stack">
+              <span>Age &amp; lifespan</span>
+              <select id="ageGroup"></select>
+            </label>
+            <label class="stack">
+              <span>Ethnicity &amp; phenotype</span>
+              <select id="ethnicitySelect"></select>
+            </label>
+            <label class="stack" id="skinRow">
+              <span>Skin tone</span>
+              <select id="skinTone"></select>
+            </label>
+            <label class="stack">
+              <span>Body type</span>
+              <select id="physique"></select>
+            </label>
+            <label class="stack" id="hairRow">
+              <span>Hair length</span>
+              <select id="hairLength"></select>
+            </label>
+            <label class="stack" id="hairStyleRow">
+              <span>Hairstyle</span>
+              <select id="hairStyle"></select>
+            </label>
+            <label class="stack" id="expressionRow">
+              <span>Facial expression</span>
+              <select id="expression"></select>
+            </label>
+            <label class="stack" id="skinSurfaceRow">
+              <span>Skin surface</span>
+              <select id="skinSurface"></select>
+            </label>
+            <label class="stack" id="poseRow">
+              <span>Pose, action &amp; body language</span>
+              <select id="posePreset"></select>
+            </label>
+          </div>
+          <label class="stack" id="mixRow">
+            <span>Mix / extra phenotype note</span>
+            <input id="ethnicity" type="text" placeholder="Optional. Example: Filipino-Chinese" />
+          </label>
+          <label class="stack" id="faceRow">
+            <span>Face notes</span>
+            <textarea id="faceNotes" rows="2" placeholder="Optional. Eyes, nose, mouth, face shape, marks."></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset class="mod mod-outfit" id="outfitFields">
+          <legend><span class="mi" aria-hidden="true">checkroom</span>Outfit</legend>
+          <div class="grid">
+            <label class="stack">
+              <span>Top</span>
+              <input id="outfitTop" type="text" placeholder="e.g. silk red blouse" />
+            </label>
+            <label class="stack">
+              <span>Bottom</span>
+              <input id="outfitBottom" type="text" placeholder="e.g. black trousers" />
+            </label>
+            <label class="stack">
+              <span>Footwear</span>
+              <input id="outfitFootwear" type="text" placeholder="e.g. worn leather boots" />
+            </label>
+            <label class="stack">
+              <span>Outerwear</span>
+              <input id="outfitOuter" type="text" placeholder="Optional" />
+            </label>
+          </div>
+          <label class="stack">
+            <span>Makeup look</span>
+            <select id="makeupLook"></select>
+          </label>
+          <label class="stack">
+            <span>Makeup extra</span>
+            <input id="outfitMakeup" type="text" placeholder="Optional add-on or custom note" />
+          </label>
+          <div class="grid">
+            <label class="stack">
+              <span>Ears</span>
+              <input id="jewelryEars" type="text" placeholder="e.g. small gold hoops" />
+            </label>
+            <label class="stack">
+              <span>Timepiece</span>
+              <input id="jewelryWatch" type="text" placeholder="e.g. thin silver watch" />
+            </label>
+          </div>
+          <label class="stack">
+            <span>Other jewelry</span>
+            <input id="jewelryOther" type="text" placeholder="Rings, necklace, etc." />
+          </label>
+        </fieldset>
+
+        <fieldset class="mod mod-scene" id="sceneFields" hidden>
+          <legend><span class="mi" aria-hidden="true">movie</span>Scene</legend>
+          <label class="stack">
+            <span>Prop in hands</span>
+            <input id="propInHands" type="text" placeholder="Optional. Name the object. Put the owner in the idea." />
+          </label>
+        </fieldset>
+
+        <fieldset class="mod mod-prop" id="propFields" hidden>
+          <legend><span class="mi" aria-hidden="true">inventory_2</span>Prop</legend>
+          <div class="grid">
+            <label class="stack">
+              <span>Scale in frame</span>
+              <select id="propScale"></select>
+            </label>
+            <label class="stack">
+              <span>Condition</span>
+              <select id="condition"></select>
+            </label>
+            <label class="stack">
+              <span>Held by</span>
+              <select id="heldBy"></select>
+            </label>
+          </div>
+          <label class="stack">
+            <span>Owner name</span>
+            <input id="propOwner" type="text" placeholder="Who is holding it, if anyone" />
+          </label>
+        </fieldset>
+
+        <fieldset class="mod mod-location" id="locationFields" hidden>
+          <legend><span class="mi" aria-hidden="true">location_on</span>Location</legend>
+          <div class="grid">
+            <label class="stack">
+              <span>Scale</span>
+              <select id="locationScale"></select>
+            </label>
+          </div>
+          <label class="check">
+            <input type="checkbox" id="emptyPlate" />
+            Empty plate (no people)
+          </label>
+          <label class="stack">
+            <span>Architecture note</span>
+            <input id="architecture" type="text" placeholder="Optional" />
+          </label>
+        </fieldset>
+
+        <fieldset class="mod mod-text" id="imageTextFields">
+          <legend><span class="mi" aria-hidden="true">title</span>In-image text</legend>
+          <div class="grid">
+            <label class="stack">
+              <span>Exact string</span>
+              <input id="inImageText" type="text" placeholder='WAKE UP' />
+            </label>
+            <label class="stack">
+              <span>Where it sits</span>
+              <input id="inImageTextPlace" type="text" placeholder="a neon sign" />
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="mod mod-video" id="videoFields" hidden>
+          <legend><span class="mi" aria-hidden="true">videocam</span>Video</legend>
+          <div class="grid">
+            <label class="stack">
+              <span>Duration</span>
+              <select id="duration"></select>
+            </label>
+            <label class="stack">
+              <span>Camera movement</span>
+              <select id="cameraMove"></select>
+            </label>
+            <label class="stack">
+              <span>Accent</span>
+              <select id="accent"></select>
+            </label>
+            <label class="stack">
+              <span>Accent note</span>
+              <input id="accentNote" type="text" placeholder="Only if Accent is Other" />
+            </label>
+          </div>
+          <label class="stack">
+            <span>Dialogue</span>
+            <textarea id="dialogue" rows="2" placeholder="Plain line. Braces are added for you."></textarea>
+          </label>
+          <label class="stack">
+            <span>Sound effects</span>
+            <textarea id="sfx" rows="2" placeholder="Door slam, wind, footsteps"></textarea>
+          </label>
+          <label class="stack">
+            <span>Music</span>
+            <textarea id="music" rows="2" placeholder="Low cello drone"></textarea>
+          </label>
+          <label class="stack">
+            <span>Subtitles</span>
+            <input id="subtitles" type="text" placeholder="Optional lower-third" />
+          </label>
+          <p class="hint">Stages are optional. Empty stages fall back to the Idea as one beat.</p>
+          <div class="stages">
+            <div class="stage">
+              <p>Stage 1</p>
+              <div class="row">
+                <input id="stage1start" type="text" value="0" aria-label="Stage 1 start seconds" />
+                <input id="stage1end" type="text" value="2" aria-label="Stage 1 end seconds" />
+              </div>
+              <input id="stage1initial" type="text" placeholder="Initial state" />
+              <input id="stage1text" type="text" placeholder="Primary event" />
+              <input id="stage1endState" type="text" placeholder="End state" />
+            </div>
+            <div class="stage">
+              <p>Stage 2</p>
+              <div class="row">
+                <input id="stage2start" type="text" value="2" aria-label="Stage 2 start seconds" />
+                <input id="stage2end" type="text" value="4" aria-label="Stage 2 end seconds" />
+              </div>
+              <input id="stage2initial" type="text" placeholder="Initial state" />
+              <input id="stage2text" type="text" placeholder="Primary event" />
+              <input id="stage2endState" type="text" placeholder="End state" />
+            </div>
+            <div class="stage">
+              <p>Stage 3</p>
+              <div class="row">
+                <input id="stage3start" type="text" value="4" aria-label="Stage 3 start seconds" />
+                <input id="stage3end" type="text" value="6" aria-label="Stage 3 end seconds" />
+              </div>
+              <input id="stage3initial" type="text" placeholder="Initial state" />
+              <input id="stage3text" type="text" placeholder="Primary event" />
+              <input id="stage3endState" type="text" placeholder="End state" />
+            </div>
+          </div>
+        </fieldset>
+
+        <label class="stack">
+          <span>Exclusions override</span>
+          <textarea id="exclusions" rows="2" placeholder="Leave blank to use the default blocklist"></textarea>
+        </label>
+      </form>
+
+      <section class="canvas">
+        <div class="section-head">
+          <h2><span class="mi" aria-hidden="true">edit_note</span>Idea + prompt</h2>
+          <span class="meta" id="wordCount">0 words</span>
+        </div>
+        <label class="stack">
+          <span>Idea</span>
+          <textarea id="idea" rows="4" placeholder="Write the beat as a full sentence, like you are talking to a cinematographer. Example: Nomi walks the alley holding the action camera in her right hand."></textarea>
+          <p class="hint">Write the beat as prose, not comma-separated tags. Put in-image text in quotes on its own field.</p>
+        </label>
+        <p id="limitNote" class="warn" hidden>Over 600 words. Cut the idea or drop a clause before pasting.</p>
+        <div id="onePrompt">
+          <label class="stack">
+            <span id="primaryLabel">Assembled prompt</span>
+            <div class="prompt-view" id="promptPrimaryView" aria-labelledby="primaryLabel"></div>
+            <textarea id="promptPrimary" class="visually-hidden" readonly></textarea>
+          </label>
+          <div id="hairPair" hidden>
+            <label class="stack">
+              <span id="forwardLabel">Hair forward (same shot)</span>
+              <div class="prompt-view prompt-view-short" id="promptForwardView" aria-labelledby="forwardLabel"></div>
+              <textarea id="promptForward" class="visually-hidden" readonly></textarea>
+            </label>
+          </div>
+        </div>
+        <div id="splitPrompt" class="split-grid" hidden>
+          <label class="stack">
+            <span>Characteristics</span>
+            <textarea id="partCharacteristics" rows="8" readonly></textarea>
+          </label>
+          <label class="stack">
+            <span>Makeup</span>
+            <textarea id="partMakeup" rows="6" readonly></textarea>
+          </label>
+          <label class="stack">
+            <span>Outfit</span>
+            <textarea id="partOutfit" rows="6" readonly></textarea>
+          </label>
+          <label class="stack">
+            <span>Camera, background, lighting</span>
+            <textarea id="partShot" rows="10" readonly></textarea>
+          </label>
+        </div>
+      </section>
+
+      <aside class="inspect">
+        <div class="section-head">
+          <h2><span class="mi" aria-hidden="true">content_copy</span>Copy</h2>
+        </div>
+        <div class="fidelity" id="fidelity">
+          <div class="fidelity-top">
+            <strong><span class="mi" aria-hidden="true">analytics</span>Prompt fidelity</strong>
+            <span class="fidelity-badge" id="fidelityBadge">THIN</span>
+          </div>
+          <div class="fidelity-row">
+            <div class="fidelity-ring" id="fidelityRing" aria-hidden="true">
+              <svg viewBox="0 0 36 36">
+                <circle cx="18" cy="18" r="15.5" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3"></circle>
+                <circle id="fidelityArc" cx="18" cy="18" r="15.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="97.4" stroke-dashoffset="97.4"></circle>
+              </svg>
+              <span id="fidelityScore">0%</span>
+            </div>
+            <p class="fidelity-copy">
+              <b>Advisory only.</b>
+              Checks the prompt guides. Nothing is required. You can copy with a low score.
+            </p>
+          </div>
+          <ul class="fidelity-list" id="fidelityList"></ul>
+        </div>
+        <label class="check">
+          <input type="checkbox" id="splitNodes" />
+          Split for nodes
+        </label>
+        <p class="hint">On: four boxes for your graph. Off: one prompt.</p>
+        <div class="actions" id="copyOne">
+          <button type="button" id="copyPrimary">Copy prompt</button>
+          <button type="button" class="ghost" id="copyForward" hidden>Copy hair-forward</button>
+        </div>
+        <div class="actions" id="copySplit" hidden>
+          <button type="button" class="ghost" id="copyCharacteristics">Copy characteristics</button>
+          <button type="button" class="ghost" id="copyMakeup">Copy makeup</button>
+          <button type="button" class="ghost" id="copyOutfit">Copy outfit</button>
+          <button type="button" class="ghost" id="copyShot">Copy camera / light / bg</button>
+        </div>
+        <div class="presets" id="presets">
+          <div class="fidelity-top">
+            <strong><span class="mi" aria-hidden="true">bookmark</span>Saved presets</strong>
+            <span class="fidelity-badge" id="presetCount">0</span>
+          </div>
+          <p class="hint" id="presetHint">Saves this setup. Local uses the MajesticHQ database. The live site saves in this browser only.</p>
+          <p class="hint" id="presetStatus">Connecting to the database…</p>
+          <label class="stack">
+            <span>Preset name</span>
+            <input id="presetName" type="text" placeholder="Optional. Example: Nomi alley walk" />
+          </label>
+          <div class="actions">
+            <button type="button" class="ghost" id="savePreset">Save as preset</button>
+          </div>
+          <p class="hint" id="presetEmpty">None yet. Fill the builder, then save.</p>
+          <ul class="preset-list" id="presetList"></ul>
+        </div>
+      </aside>
+    </div>
+
+    <script src="stitch.js"></script>
+    <script src="app.js?v=live2"></script>
+  </body>
+</html>

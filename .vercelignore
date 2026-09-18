@@ -1,0 +1,7 @@
+.vercel
+notes
+DESIGN.md
+README.md
+.gitignore
+.env.local
+node_modules
