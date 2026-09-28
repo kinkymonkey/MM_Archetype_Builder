@@ -7,7 +7,7 @@ A click-to-build prompt maker for image and video models. It does not generate p
 ## How it works
 
 1. Write the idea as a full sentence. That beat is what the model reads first. Skip comma-separated tags.
-2. Choose Image or Video, then Character, Scene, Prop, or Location. The menus below change with the kind.
+2. Choose Image or Video, then Character, Scene, Product/Props, or Location. The menus below change with the kind: Product/Props and Location hide the face, body and outfit fields and add their own camera, lens, aperture and lighting options.
 3. Set camera, lens, lighting, colour, size, and the fields for that kind.
 4. Copy the assembled prompt. Paste it into your image or video tool.
 

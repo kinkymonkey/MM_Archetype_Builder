@@ -60,7 +60,6 @@
     makeupLook: "none",
     bindRef: false,
     propInHands: "",
-    propScale: "hero",
     condition: "worn",
     heldBy: "nobody",
     propOwner: "",
@@ -76,8 +75,12 @@
     reflection: "none",
     envMotion: "none",
     frameRate: "none",
-    locationScale: "street",
-    emptyPlate: false,
+    locationType: "outdoor-landscape-vista",
+    geometry: "none",
+    season: "none",
+    foreground: "none",
+    locationCondition: "none",
+    accentMaterial: "none",
     architecture: "",
     inImageText: "",
     inImageTextPlace: "",
@@ -112,9 +115,10 @@
   }
 
   function fillSelect(select, items, value) {
-    var product = val("kind") === "prop";
+    var kind = val("kind");
     items = (items || []).filter(function (item) {
-      return product ? !item.noProduct : !item.productOnly;
+      if (item.only && item.only.indexOf(kind) === -1) return false;
+      return !(item.hide && item.hide.indexOf(kind) !== -1);
     });
     var hasSkip = items.some(function (item) {
       return item.id === "none" || item.id === "";
@@ -252,7 +256,8 @@
         style: "photoreal",
         settingType: "none",
         weatherTime: "none",
-        emptyPlate: false,
+        posePreset: "guard",
+        expression: "neutral",
       },
       scene: {
         format: video ? "cinematic-scene" : "cinematic-still",
@@ -268,7 +273,8 @@
         entityType: "person",
         headcount: "1",
         style: "cinematic",
-        emptyPlate: false,
+        posePreset: "none",
+        expression: "none",
       },
       prop: {
         format: video ? "commercial" : "lookbook",
@@ -290,9 +296,7 @@
         settingType: "studio",
         colorTemp: "5600k",
         heldBy: "nobody",
-        propScale: "hero",
         condition: "new",
-        emptyPlate: false,
       },
       location: {
         format: video ? "cinematic-scene" : "cinematic-still",
@@ -308,8 +312,7 @@
         entityType: "landscape",
         headcount: "0",
         style: "photoreal",
-        locationScale: "landscape",
-        emptyPlate: true,
+        locationType: "outdoor-landscape-vista",
       },
     };
     return map[kind] || map.character;
@@ -334,18 +337,95 @@
 
   var KIND_FILTERED = {
     crop: "crops",
+    cameraAngle: "cameraAngles",
     camera: "cameras",
     lens: "lenses",
+    aperture: "apertures",
+    surfaceMaterial: "materials",
+    accentMaterial: "materials",
+    envMotion: "envMotions",
+    frameRate: "frameRates",
     lighting: "lighting",
     colorGrade: "colorGrades",
     studioBackground: "studioBackgrounds",
     style: "styles",
     cameraMove: "cameraMoves",
+    entityType: "entityTypes",
   };
 
   function syncKindOptions() {
     Object.keys(KIND_FILTERED).forEach(function (id) {
       fillSelect(el(id), catalogs[KIND_FILTERED[id]], val(id));
+    });
+  }
+
+  // Camera, lens, aperture, framing and light per shot type, from the location photography guide.
+  function locationTypePreset(type, medium) {
+    var video = medium === "video";
+    var map = {
+      "outdoor-landscape-vista": {
+        format: video ? "cinematic-scene" : "landscape-photography",
+        size: "16-9",
+        crop: "wide-panoramic-vista",
+        camera: video ? "sony-fx3-video" : "hasselblad-h6d-100c",
+        lens: "21mm-wide-angle",
+        dof: "deep",
+        aperture: "loc-f8",
+        lighting: "golden-hour-sun-low-on-the-horizon",
+        geometry: "layered-foreground-to-horizon",
+      },
+      "interior-architectural-space": {
+        format: video ? "cinematic-scene" : "architectural-interior-photography",
+        size: "16-9",
+        crop: "corner-wide-shot",
+        camera: video ? "sony-fx3-video" : "canon-eos-r5",
+        lens: "24mm-tilt-shift",
+        dof: "deep",
+        aperture: "loc-f5-6",
+        lighting: "daylight-through-tall-windows",
+        geometry: "straight-verticals-no-distortion",
+      },
+      "exterior-architecture": {
+        format: video ? "cinematic-scene" : "architectural-exterior-photography",
+        size: "16-9",
+        crop: "straight-on-symmetrical-elevation",
+        camera: video ? "sony-fx3-video" : "leica-sl2",
+        lens: "24mm-tilt-shift",
+        dof: "deep",
+        aperture: "loc-f8",
+        lighting: "golden-hour-sun-low-on-the-horizon",
+        geometry: "clean-geometric-symmetry",
+      },
+      "urban-street": {
+        format: video ? "cinematic-scene" : "cinematic-still",
+        size: "16-9",
+        crop: "wide",
+        camera: video ? "sony-fx3-video" : "leica",
+        lens: "35mm-wide-prime",
+        dof: "deep",
+        aperture: "loc-f8",
+        lighting: "overcast",
+        geometry: "leading-lines-into-depth",
+      },
+      "material-detail-close-up": {
+        format: video ? "cinematic-scene" : "macro-material-detail-shot",
+        size: "3-2",
+        crop: "extreme-close-up",
+        camera: video ? "sony-fx3-video" : "hasselblad-x2d-100c",
+        lens: "90-105mm-macro-f-2-8",
+        dof: "shallow",
+        aperture: "loc-f2-8",
+        lighting: "low-grazing-light-on-texture",
+        geometry: "none",
+      },
+    };
+    return map[type] || map["outdoor-landscape-vista"];
+  }
+
+  function applyLocationTypePreset() {
+    var preset = locationTypePreset(val("locationType"), val("medium"));
+    Object.keys(preset).forEach(function (id) {
+      setField(id, preset[id]);
     });
   }
 
@@ -361,6 +441,7 @@
     syncHeadcountSelect();
     setField("format", preset.format);
     setField("headcount", preset.headcount);
+    if (kind === "location") applyLocationTypePreset();
     render();
   }
 
@@ -425,9 +506,6 @@
     show("imageTextFields", medium === "image");
     syncFormatSelect();
     syncHeadcountSelect();
-    if (kind === "location" && el("emptyPlate").checked) {
-      el("headcount").value = "0";
-    }
   }
 
   function collectState() {
@@ -509,12 +587,15 @@
       jewelryOther: val("jewelryOther"),
       bindRef: val("bindRef"),
       propInHands: val("propInHands"),
-      propScale: val("propScale"),
       condition: val("condition"),
       heldBy: val("heldBy"),
       propOwner: val("propOwner"),
-      locationScale: val("locationScale"),
-      emptyPlate: val("emptyPlate"),
+      locationType: val("locationType"),
+      geometry: val("geometry"),
+      season: val("season"),
+      foreground: val("foreground"),
+      locationCondition: val("locationCondition"),
+      accentMaterial: val("accentMaterial"),
       architecture: val("architecture"),
       inImageText: val("inImageText"),
       inImageTextPlace: val("inImageTextPlace"),
@@ -915,8 +996,9 @@
         el("studioBackground").value = "light-gray-gradient";
       }
     });
-    el("emptyPlate").addEventListener("change", function () {
-      if (el("emptyPlate").checked) el("headcount").value = "0";
+    el("locationType").addEventListener("change", function () {
+      applyLocationTypePreset();
+      render();
     });
     el("copyPrimary").addEventListener("click", function () {
       copyPrompt("primary");
@@ -1044,10 +1126,14 @@
     fillSelect(el("expression"), catalogs.expressions, defaults.expression);
     fillSelect(el("posePreset"), catalogs.posePresets, defaults.posePreset);
     fillSelect(el("makeupLook"), catalogs.makeupLooks, defaults.makeupLook);
-    fillSelect(el("propScale"), catalogs.propScales, defaults.propScale);
     fillSelect(el("condition"), catalogs.conditions, defaults.condition);
     fillSelect(el("heldBy"), catalogs.heldBy, defaults.heldBy);
-    fillSelect(el("locationScale"), catalogs.locationScales, defaults.locationScale);
+    fillSelect(el("locationType"), catalogs.locationTypes, defaults.locationType);
+    fillSelect(el("geometry"), catalogs.geometries, defaults.geometry);
+    fillSelect(el("season"), catalogs.seasons, defaults.season);
+    fillSelect(el("foreground"), catalogs.foregrounds, defaults.foreground);
+    fillSelect(el("locationCondition"), catalogs.locationConditions, defaults.locationCondition);
+    fillSelect(el("accentMaterial"), catalogs.materials, defaults.accentMaterial);
     fillSelect(el("duration"), catalogs.durations, defaults.duration);
     fillSelect(el("cameraMove"), catalogs.cameraMoves, defaults.cameraMove);
     fillSelect(el("accent"), catalogs.accents, defaults.accent);

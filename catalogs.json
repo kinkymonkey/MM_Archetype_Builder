@@ -10,14 +10,19 @@
     { "id": "location", "label": "Location" }
   ],
   "formatsImage": [
-    { "id": "character-sheet", "noProduct": true, "label": "Character reference sheet", "phrase": "Character reference sheet" },
+    { "id": "character-sheet", "hide": ["scene", "prop", "location"], "label": "Character reference sheet", "phrase": "Character reference sheet" },
     { "id": "cinematic-still", "label": "Cinematic film still", "phrase": "Cinematic film still" },
-    { "id": "editorial", "noProduct": true, "label": "Editorial fashion photo", "phrase": "Editorial fashion photo" },
+    { "id": "editorial", "hide": ["scene", "prop", "location"], "label": "Editorial fashion photo", "phrase": "Editorial fashion photo" },
     { "id": "candid", "label": "Candid social / smartphone photo", "phrase": "Candid social/smartphone photo" },
-    { "id": "documentary", "noProduct": true, "label": "Documentary photo", "phrase": "Documentary photo" },
-    { "id": "lookbook", "label": "Lookbook / product shot", "phrase": "Lookbook / product shot" },
+    { "id": "documentary", "hide": ["prop"], "label": "Documentary photo", "phrase": "Documentary photo" },
+    { "id": "lookbook", "hide": ["scene", "location"], "label": "Lookbook / product shot", "phrase": "Lookbook / product shot" },
     { "id": "poster", "label": "Poster / key art", "phrase": "Poster / key art" },
-    { "id": "logo", "label": "Logo / banner", "phrase": "Logo / banner" }
+    { "id": "logo", "label": "Logo / banner", "phrase": "Logo / banner" },
+    { "id": "landscape-photography", "only": ["location"], "label": "Landscape photography", "phrase": "Landscape photograph" },
+    { "id": "architectural-interior-photography", "only": ["location"], "label": "Architectural interior photography", "phrase": "Architectural interior photograph" },
+    { "id": "architectural-exterior-photography", "only": ["location"], "label": "Architectural exterior photography", "phrase": "Architectural exterior photograph" },
+    { "id": "design-magazine-editorial-spread", "only": ["location"], "label": "Design magazine editorial spread", "phrase": "Architectural Digest-style editorial spread" },
+    { "id": "macro-material-detail-shot", "only": ["location"], "label": "Macro material detail shot", "phrase": "Macro material detail shot" }
   ],
   "formatsVideo": [
     { "id": "cinematic-scene", "label": "Cinematic film scene", "phrase": "Cinematic film scene" },
@@ -43,21 +48,26 @@
     { "id": "back", "label": "Back", "phrase": "subject facing away from the camera" }
   ],
   "cameraAngles": [
-    { "id": "eye-level", "label": "Eye-level", "phrase": "eye-level camera, lens at the subject's eye line" },
+    { "id": "eye-level", "label": "Eye-level", "phrase": "eye-level camera, lens at the subject's eye line", "objectPhrase": "eye-level camera at standing eye height" },
     { "id": "low", "label": "Low angle (hero shot)", "phrase": "low angle hero shot, camera below the subject looking up" },
     { "id": "high", "label": "High angle", "phrase": "high angle, camera above the subject looking down" },
     { "id": "overhead", "label": "Overhead / bird's-eye", "phrase": "overhead bird's-eye view, camera looking straight down" },
     { "id": "worms-eye", "label": "Worm's-eye view", "phrase": "worm's-eye view, camera on the ground plane looking steeply up" },
-    { "id": "dutch", "label": "Dutch angle (tilted)", "phrase": "Dutch angle, the horizon line tilted in the frame" }
+    { "id": "dutch", "label": "Dutch angle (tilted)", "phrase": "Dutch angle, the horizon line tilted in the frame" },
+    { "id": "aerial-drone-view", "only": ["location"], "label": "Aerial / drone view", "phrase": "aerial drone view looking down across the location" },
+    { "id": "low-angle-leading-line", "only": ["location"], "label": "Low-angle leading line", "phrase": "low angle close to the ground, a leading line drawing the eye into the frame" }
   ],
   "crops": [
     { "id": "extreme-close-up", "label": "Extreme close-up (macro)", "phrase": "extreme close-up / macro, a single feature filling the frame" },
-    { "id": "close-up", "noProduct": true, "label": "Close-up portrait", "phrase": "close-up portrait, head and shoulders" },
-    { "id": "medium", "label": "Medium shot", "phrase": "medium shot from the waist up" },
-    { "id": "full-body", "noProduct": true, "label": "Full body shot", "phrase": "full body shot, head to toe in frame" },
+    { "id": "close-up", "hide": ["prop", "location"], "label": "Close-up portrait", "phrase": "close-up portrait, head and shoulders" },
+    { "id": "medium", "hide": ["prop", "location"], "label": "Medium shot", "phrase": "medium shot from the waist up" },
+    { "id": "full-body", "hide": ["prop", "location"], "label": "Full body shot", "phrase": "full body shot, head to toe in frame" },
     { "id": "wide", "label": "Wide shot", "phrase": "wide shot, subject in environment" },
     { "id": "extreme-wide", "label": "Extreme wide environmental", "phrase": "extreme wide environmental shot, landscape or architecture dominating the frame" },
-    { "id": "product-close-up", "productOnly": true, "label": "Product close-up", "phrase": "close-up of the product filling most of the frame" }
+    { "id": "product-close-up", "only": ["prop"], "label": "Product close-up", "phrase": "close-up of the product filling most of the frame" },
+    { "id": "straight-on-symmetrical-elevation", "only": ["location"], "label": "Straight-on symmetrical elevation", "phrase": "straight-on symmetrical elevation, the facade or wall squared to the camera" },
+    { "id": "corner-wide-shot", "only": ["location"], "label": "Corner wide shot", "phrase": "corner wide shot showing two walls and the depth of the space" },
+    { "id": "wide-panoramic-vista", "only": ["location"], "label": "Wide panoramic vista", "phrase": "wide panoramic vista with massive spatial depth" }
   ],
   "cameras": [
     { "id": "smartphone", "label": "Smartphone", "phrase": "smartphone camera with natural handheld softness, subtle sensor noise, and slight wide-angle barrel distortion" },
@@ -66,11 +76,15 @@
     { "id": "hasselblad", "label": "Hasselblad medium format", "phrase": "Hasselblad medium format with exceptional tonal gradation and editorial clarity" },
     { "id": "phase-one", "label": "Phase One", "phrase": "Phase One commercial camera with razor-sharp edge definition" },
     { "id": "cinema-35", "label": "35mm cinema camera", "phrase": "35mm cinema camera" },
-    { "id": "sony-a7r-v", "productOnly": true, "label": "Sony A7R V", "phrase": "Sony A7R V high-resolution hybrid camera with 61MP detail" },
-    { "id": "canon-eos-r5-mark-ii", "productOnly": true, "label": "Canon EOS R5 Mark II", "phrase": "Canon EOS R5 Mark II high-resolution hybrid camera" },
-    { "id": "nikon-z8", "productOnly": true, "label": "Nikon Z8", "phrase": "Nikon Z8 high-resolution hybrid camera" },
-    { "id": "sony-fx3-video", "productOnly": true, "label": "Sony FX3 (video)", "phrase": "Sony FX3 cinema camera with clean dual-native ISO dynamic range" },
-    { "id": "red-komodo-x-video", "productOnly": true, "label": "RED Komodo-X (video)", "phrase": "RED Komodo-X cinema camera" }
+    { "id": "sony-a7r-v", "only": ["prop", "location"], "label": "Sony A7R V", "phrase": "Sony A7R V high-resolution hybrid camera with 61MP detail" },
+    { "id": "canon-eos-r5-mark-ii", "only": ["prop"], "label": "Canon EOS R5 Mark II", "phrase": "Canon EOS R5 Mark II high-resolution hybrid camera" },
+    { "id": "nikon-z8", "only": ["prop"], "label": "Nikon Z8", "phrase": "Nikon Z8 high-resolution hybrid camera" },
+    { "id": "sony-fx3-video", "only": ["prop", "location"], "label": "Sony FX3 (video)", "phrase": "Sony FX3 cinema camera with clean dual-native ISO dynamic range" },
+    { "id": "red-komodo-x-video", "only": ["prop"], "label": "RED Komodo-X (video)", "phrase": "RED Komodo-X cinema camera" },
+    { "id": "hasselblad-h6d-100c", "only": ["location"], "label": "Hasselblad H6D-100c", "phrase": "Hasselblad H6D-100c medium format camera with 100MP detail and wide dynamic range" },
+    { "id": "hasselblad-x2d-100c", "only": ["location"], "label": "Hasselblad X2D 100C", "phrase": "Hasselblad X2D 100C medium format camera" },
+    { "id": "canon-eos-r5", "only": ["location"], "label": "Canon EOS R5", "phrase": "Canon EOS R5 full-frame camera" },
+    { "id": "leica-sl2", "only": ["location"], "label": "Leica SL2", "phrase": "Leica SL2 full-frame camera" }
   ],
   "lenses": [
     { "id": "16mm", "label": "16mm ultra-wide", "phrase": "16mm ultra-wide lens" },
@@ -79,12 +93,16 @@
     { "id": "50mm", "label": "50mm standard", "phrase": "50mm standard lens" },
     { "id": "85mm", "label": "85mm portrait", "phrase": "85mm portrait lens" },
     { "id": "200mm", "label": "200mm telephoto", "phrase": "200mm telephoto lens with compressed perspective" },
-    { "id": "fisheye", "label": "Fisheye", "phrase": "fisheye lens with extreme curved barrel distortion" },
-    { "id": "90-105mm-macro-f-2-8", "productOnly": true, "label": "90–105mm macro f/2.8", "phrase": "100mm macro lens with true 1:1 magnification and zero edge distortion" },
-    { "id": "150-180mm-telephoto-macro-f-3-5", "productOnly": true, "label": "150–180mm telephoto macro f/3.5", "phrase": "180mm telephoto macro lens with a long working distance" },
-    { "id": "laowa-24mm-f-14-2x-probe", "productOnly": true, "label": "Laowa 24mm f/14 2x probe", "phrase": "Laowa 24mm f/14 2x macro probe lens with extended depth of field" },
-    { "id": "45mm-tilt-shift", "productOnly": true, "label": "45mm tilt-shift", "phrase": "45mm tilt-shift lens with the plane of focus angled to keep staggered props sharp" },
-    { "id": "90mm-tilt-shift", "productOnly": true, "label": "90mm tilt-shift", "phrase": "90mm tilt-shift lens with the plane of focus angled to keep staggered props sharp" }
+    { "id": "fisheye", "hide": ["location"], "label": "Fisheye", "phrase": "fisheye lens with extreme curved barrel distortion" },
+    { "id": "90-105mm-macro-f-2-8", "only": ["prop", "location"], "label": "90–105mm macro f/2.8", "phrase": "100mm macro lens with true 1:1 magnification and zero edge distortion" },
+    { "id": "150-180mm-telephoto-macro-f-3-5", "only": ["prop"], "label": "150–180mm telephoto macro f/3.5", "phrase": "180mm telephoto macro lens with a long working distance" },
+    { "id": "laowa-24mm-f-14-2x-probe", "only": ["prop"], "label": "Laowa 24mm f/14 2x probe", "phrase": "Laowa 24mm f/14 2x macro probe lens with extended depth of field" },
+    { "id": "45mm-tilt-shift", "only": ["prop"], "label": "45mm tilt-shift", "phrase": "45mm tilt-shift lens with the plane of focus angled to keep staggered props sharp" },
+    { "id": "90mm-tilt-shift", "only": ["prop"], "label": "90mm tilt-shift", "phrase": "90mm tilt-shift lens with the plane of focus angled to keep staggered props sharp" },
+    { "id": "14mm-ultra-wide-prime", "only": ["location"], "label": "14mm ultra-wide prime", "phrase": "14mm ultra-wide prime lens with straight lines and zero barrel distortion" },
+    { "id": "21mm-wide-angle", "only": ["location"], "label": "21mm wide-angle", "phrase": "21mm wide-angle lens" },
+    { "id": "24mm-tilt-shift", "only": ["location"], "label": "24mm tilt-shift", "phrase": "24mm tilt-shift lens keeping vertical lines straight with no keystoning" },
+    { "id": "35mm-wide-prime", "only": ["location"], "label": "35mm wide prime", "phrase": "35mm wide prime lens" }
   ],
   "depthsOfField": [
     { "id": "shallow", "label": "Shallow (bokeh background)", "phrase": "shallow depth of field, sharp subject, blurry bokeh background" },
@@ -92,11 +110,11 @@
     { "id": "tilt-shift", "label": "Tilt-shift", "phrase": "tilt-shift focus, a thin plane of sharpness with miniature-like falloff" }
   ],
   "lighting": [
-    { "id": "rembrandt", "noProduct": true, "group": "Classic portrait & studio", "label": "Rembrandt", "phrase": "Rembrandt lighting: a single key light at 45 degrees, casting a distinct small triangle of light on the shadowed cheek, classical dramatic depth" },
-    { "id": "butterfly", "noProduct": true, "group": "Classic portrait & studio", "label": "Butterfly (Paramount)", "phrase": "Butterfly (Paramount) lighting: light placed directly above and in front of the face, a small shadow under the nose, flattering cheekbones, high-fashion glamour" },
-    { "id": "split", "noProduct": true, "group": "Classic portrait & studio", "label": "Split lighting", "phrase": "Split lighting: light hits the subject directly from one side, one half of the face illuminated, the other half in deep shadow, high tension" },
-    { "id": "loop", "noProduct": true, "group": "Classic portrait & studio", "label": "Loop lighting", "phrase": "Loop lighting: key light slightly higher than eye level and 30–45 degrees to the side, a small nose shadow pointing toward the corner of the mouth, natural and balanced" },
-    { "id": "rim", "group": "Classic portrait & studio", "label": "Rim / edge / kicker", "phrase": "Rim / edge / kicker lighting: strong backlight behind the subject, a glowing silhouette and bright edge around hair and shoulders, separating the figure from a dark background" },
+    { "id": "rembrandt", "hide": ["prop", "location"], "group": "Classic portrait & studio", "label": "Rembrandt", "phrase": "Rembrandt lighting: a single key light at 45 degrees, casting a distinct small triangle of light on the shadowed cheek, classical dramatic depth" },
+    { "id": "butterfly", "hide": ["prop", "location"], "group": "Classic portrait & studio", "label": "Butterfly (Paramount)", "phrase": "Butterfly (Paramount) lighting: light placed directly above and in front of the face, a small shadow under the nose, flattering cheekbones, high-fashion glamour" },
+    { "id": "split", "hide": ["prop", "location"], "group": "Classic portrait & studio", "label": "Split lighting", "phrase": "Split lighting: light hits the subject directly from one side, one half of the face illuminated, the other half in deep shadow, high tension" },
+    { "id": "loop", "hide": ["prop", "location"], "group": "Classic portrait & studio", "label": "Loop lighting", "phrase": "Loop lighting: key light slightly higher than eye level and 30–45 degrees to the side, a small nose shadow pointing toward the corner of the mouth, natural and balanced" },
+    { "id": "rim", "hide": ["location"], "group": "Classic portrait & studio", "label": "Rim / edge / kicker", "phrase": "Rim / edge / kicker lighting: strong backlight behind the subject, a glowing silhouette and bright edge around hair and shoulders, separating the figure from a dark background" },
     { "id": "softbox", "group": "Classic portrait & studio", "label": "Softbox / diffused studio", "phrase": "Softbox / diffused studio light: a large even light source, minimal harsh shadows, soft transitions, clean commercial illumination" },
     { "id": "golden-hour", "group": "Natural & environmental", "label": "Golden hour", "phrase": "Golden hour: low-angle warm directional sunlight shortly after sunrise or before sunset, long soft shadows and rich amber tones" },
     { "id": "blue-hour", "group": "Natural & environmental", "label": "Blue hour / twilight", "phrase": "Blue hour / twilight: cool ambient diffuse blue tones just before sunrise or after sunset, calm melancholic outdoor mood" },
@@ -110,13 +128,18 @@
     { "id": "dual-tone", "group": "Stylized & artificial", "label": "Dual-tone / bi-color gel", "phrase": "Dual-tone / bi-color gel lighting: two contrasting colored light sources lighting the subject from opposite sides" },
     { "id": "neon", "group": "Stylized & artificial", "label": "Neon glow / cyberpunk", "phrase": "Neon glow / cyberpunk lighting: saturated artificial point lights reflecting off wet surfaces, leather, or metal in a dark environment" },
     { "id": "practical", "group": "Stylized & artificial", "label": "Practical / point-source", "phrase": "Practical / point-source lighting: illumination coming from objects in the scene such as a candle, fireplace, match, or desk lamp" },
-    { "id": "softbox-key-from-camera-left", "productOnly": true, "group": "Product", "label": "Softbox key from camera-left", "phrase": "soft directional softbox key light from camera-left" },
-    { "id": "hard-sunlight-geometric-shadows", "productOnly": true, "group": "Product", "label": "Hard sunlight, geometric shadows", "phrase": "hard direct sunlight casting crisp geometric shadows" },
-    { "id": "hard-side-light-long-shadows", "productOnly": true, "group": "Product", "label": "Hard side light, long shadows", "phrase": "hard side lighting casting sharp long shadows" },
-    { "id": "water-caustics", "productOnly": true, "group": "Product", "label": "Water caustics", "phrase": "caustics of light passing through water, dancing across the product" },
-    { "id": "backlit-swatch", "productOnly": true, "group": "Product", "label": "Backlit swatch", "phrase": "backlighting through the cream swatch to show its texture and translucency" },
-    { "id": "continuous-led-high-cri", "productOnly": true, "group": "Product", "label": "Continuous LED, high CRI", "phrase": "continuous high-CRI LED studio light with exact colour reproduction of creams and labels" },
-    { "id": "strobe-frozen-motion", "productOnly": true, "group": "Product", "label": "Strobe, frozen motion", "phrase": "studio strobe with a short flash duration freezing splashes and droplets mid-air" }
+    { "id": "softbox-key-from-camera-left", "only": ["prop"], "group": "Product", "label": "Softbox key from camera-left", "phrase": "soft directional softbox key light from camera-left" },
+    { "id": "hard-sunlight-geometric-shadows", "only": ["prop"], "group": "Product", "label": "Hard sunlight, geometric shadows", "phrase": "hard direct sunlight casting crisp geometric shadows" },
+    { "id": "hard-side-light-long-shadows", "only": ["prop"], "group": "Product", "label": "Hard side light, long shadows", "phrase": "hard side lighting casting sharp long shadows" },
+    { "id": "water-caustics", "only": ["prop"], "group": "Product", "label": "Water caustics", "phrase": "caustics of light passing through water, dancing across the product" },
+    { "id": "backlit-swatch", "only": ["prop"], "group": "Product", "label": "Backlit swatch", "phrase": "backlighting through the cream swatch to show its texture and translucency" },
+    { "id": "continuous-led-high-cri", "only": ["prop"], "group": "Product", "label": "Continuous LED, high CRI", "phrase": "continuous high-CRI LED studio light with exact colour reproduction of creams and labels" },
+    { "id": "strobe-frozen-motion", "only": ["prop"], "group": "Product", "label": "Strobe, frozen motion", "phrase": "studio strobe with a short flash duration freezing splashes and droplets mid-air" },
+    { "id": "golden-hour-sun-low-on-the-horizon", "only": ["location"], "group": "Location", "label": "Golden hour sun low on the horizon", "phrase": "golden hour sunlight low on the horizon casting long, deep shadows" },
+    { "id": "dramatic-storm-light", "only": ["location"], "group": "Location", "label": "Dramatic storm light", "phrase": "dramatic high-contrast storm lighting, sun breaking through dark clouds" },
+    { "id": "daylight-through-tall-windows", "only": ["location"], "group": "Location", "label": "Daylight through tall windows", "phrase": "diffused daylight streaming through floor-to-ceiling windows" },
+    { "id": "warm-3000k-architectural-uplighting", "only": ["location"], "group": "Location", "label": "Warm 3000K architectural uplighting", "phrase": "warm 3000K ambient architectural uplighting" },
+    { "id": "low-grazing-light-on-texture", "only": ["location"], "group": "Location", "label": "Low grazing light on texture", "phrase": "low-key directional grazing light highlighting fine surface grain and tactile depth" }
   ],
   "studioBackgrounds": [
     { "id": "none", "group": "Studio seamless", "label": "None", "phrase": "" },
@@ -137,14 +160,14 @@
     { "id": "white-sweep", "group": "Sweep / cove", "label": "White infinity sweep", "phrase": "white infinity cove / cyclorama, seamless wall-to-floor sweep, no horizon line" },
     { "id": "gray-sweep", "group": "Sweep / cove", "label": "Gray infinity sweep", "phrase": "light gray infinity cove, seamless wall-to-floor sweep, no horizon line" },
     { "id": "black-velvet", "group": "Sweep / cove", "label": "Black velvet", "phrase": "matte black velvet studio background, light-absorbing, no reflections" },
-    { "id": "mottled-gray", "noProduct": true, "group": "Portrait canvas", "label": "Mottled gray canvas", "phrase": "classic painted mottled gray portrait canvas backdrop, soft cloudy texture" },
-    { "id": "mottled-brown", "noProduct": true, "group": "Portrait canvas", "label": "Mottled brown canvas", "phrase": "classic painted mottled brown portrait canvas backdrop" },
+    { "id": "mottled-gray", "hide": ["prop"], "group": "Portrait canvas", "label": "Mottled gray canvas", "phrase": "classic painted mottled gray portrait canvas backdrop, soft cloudy texture" },
+    { "id": "mottled-brown", "hide": ["prop"], "group": "Portrait canvas", "label": "Mottled brown canvas", "phrase": "classic painted mottled brown portrait canvas backdrop" },
     { "id": "chroma-green", "group": "Chromakey", "label": "Chroma green", "phrase": "even chroma-key green studio seamless background" },
     { "id": "chroma-blue", "group": "Chromakey", "label": "Chroma blue", "phrase": "even chroma-key blue studio seamless background" }
   ],
   "styles": [
     { "id": "photoreal", "group": "Photoreal / live-action", "label": "Ultra-realistic photoreal", "phrase": "Ultra-realistic photoreal style with no stylization" },
-    { "id": "editorial", "noProduct": true, "group": "Photoreal / live-action", "label": "Editorial fashion", "phrase": "Editorial fashion style, high-contrast commercial color grading" },
+    { "id": "editorial", "hide": ["prop", "location"], "group": "Photoreal / live-action", "label": "Editorial fashion", "phrase": "Editorial fashion style, high-contrast commercial color grading" },
     { "id": "candid", "group": "Photoreal / live-action", "label": "Candid smartphone", "phrase": "Candid smartphone style, organic handheld feel with authentic mobile sensor response" },
     { "id": "cinematic", "group": "Photoreal / live-action", "label": "Cinematic film still", "phrase": "Cinematic film-still style, film-stock emulation and atmospheric depth" },
     { "id": "documentary", "group": "Photoreal / live-action", "label": "Documentary", "phrase": "Documentary style, unvarnished photojournalism" },
@@ -197,19 +220,19 @@
     { "id": "crowd", "label": "Crowd", "n": "crowd" }
   ],
   "entityTypes": [
-    { "id": "person", "label": "Person", "phrase": "person", "living": true, "hair": true },
-    { "id": "humanoid", "label": "Humanoid", "phrase": "humanoid", "living": true, "hair": true },
-    { "id": "creature", "label": "Creature", "phrase": "creature", "living": true, "hair": false },
-    { "id": "monster", "label": "Monster", "phrase": "monster", "living": true, "hair": false },
-    { "id": "cyborg", "label": "Cyborg / android", "phrase": "cyborg / android", "living": true, "hair": true },
-    { "id": "mech", "label": "Mech", "phrase": "mech", "living": true, "hair": false },
-    { "id": "animal", "label": "Animal", "phrase": "animal", "living": true, "hair": false },
-    { "id": "architecture", "label": "Architectural structure", "phrase": "architectural structure", "living": false },
-    { "id": "vehicle", "label": "Vehicle", "phrase": "vehicle", "living": false },
-    { "id": "landscape", "label": "Landscape", "phrase": "landscape", "living": false },
-    { "id": "interior", "label": "Environmental interior", "phrase": "environmental interior", "living": false },
-    { "id": "abstract", "label": "Abstract concept", "phrase": "abstract concept made visible", "living": false },
-    { "id": "object", "label": "Object / prop", "phrase": "object / prop", "living": false }
+    { "id": "person", "label": "Person", "phrase": "person", "living": true, "hair": true, "human": true},
+    { "id": "humanoid", "label": "Humanoid", "phrase": "humanoid", "living": true, "hair": true, "human": true},
+    { "id": "creature", "label": "Creature", "phrase": "creature", "living": true, "hair": false},
+    { "id": "monster", "label": "Monster", "phrase": "monster", "living": true, "hair": false},
+    { "id": "cyborg", "label": "Cyborg / android", "phrase": "cyborg / android", "living": true, "hair": true, "human": true},
+    { "id": "mech", "label": "Mech", "phrase": "mech", "living": true, "hair": false},
+    { "id": "animal", "label": "Animal", "phrase": "animal", "living": true, "hair": false},
+    { "id": "architecture", "hide": ["character"], "label": "Architectural structure", "phrase": "architectural structure", "living": false},
+    { "id": "vehicle", "label": "Vehicle", "phrase": "vehicle", "living": false},
+    { "id": "landscape", "hide": ["character"], "label": "Landscape", "phrase": "landscape", "living": false},
+    { "id": "interior", "hide": ["character"], "label": "Environmental interior", "phrase": "environmental interior", "living": false},
+    { "id": "abstract", "label": "Abstract concept", "phrase": "abstract concept made visible", "living": false},
+    { "id": "object", "hide": ["character"], "label": "Object / prop", "phrase": "object / prop", "living": false}
   ],
   "sexes": [
     { "id": "female", "label": "Female", "phrase": "female" },
@@ -386,16 +409,26 @@
   ],
   "materials": [
     { "id": "none", "label": "None", "phrase": "" },
-    { "id": "cotton-knit", "label": "Heavy cotton knit", "phrase": "heavy cotton knit" },
+    { "id": "cotton-knit", "hide": ["location"], "label": "Heavy cotton knit", "phrase": "heavy cotton knit" },
     { "id": "concrete", "label": "Weathered concrete", "phrase": "weathered concrete" },
     { "id": "matte-black", "label": "Matte black composite", "phrase": "matte black composite" },
     { "id": "brushed-chrome", "label": "Brushed chrome", "phrase": "brushed chrome" },
     { "id": "iridescent-glass", "label": "Iridescent glass", "phrase": "iridescent glass" },
     { "id": "weathered-leather", "label": "Weathered leather", "phrase": "weathered leather" },
-    { "id": "silk", "label": "Silk", "phrase": "silk" },
-    { "id": "chiffon", "label": "Sheer chiffon", "phrase": "sheer chiffon" },
+    { "id": "silk", "hide": ["location"], "label": "Silk", "phrase": "silk" },
+    { "id": "chiffon", "hide": ["location"], "label": "Sheer chiffon", "phrase": "sheer chiffon" },
     { "id": "marble", "label": "Polished marble", "phrase": "polished marble" },
-    { "id": "denim", "label": "Raw denim", "phrase": "raw denim" }
+    { "id": "denim", "hide": ["location"], "label": "Raw denim", "phrase": "raw denim" },
+    { "id": "honed-travertine-stone", "only": ["location"], "label": "Honed travertine stone", "phrase": "honed travertine stone" },
+    { "id": "raw-concrete-with-formwork-lines", "only": ["location"], "label": "Raw concrete with formwork lines", "phrase": "exposed raw concrete with formwork lines" },
+    { "id": "brushed-brass-accents", "only": ["location"], "label": "Brushed brass accents", "phrase": "brushed brass accents" },
+    { "id": "weathered-cedar-wood", "only": ["location"], "label": "Weathered cedar wood", "phrase": "weathered cedar wood" },
+    { "id": "dark-honed-granite", "only": ["location"], "label": "Dark honed granite", "phrase": "dark honed granite" },
+    { "id": "oiled-teak-wood", "only": ["location"], "label": "Oiled teak wood", "phrase": "oiled teak wood" },
+    { "id": "weathered-marble", "only": ["location"], "label": "Weathered marble", "phrase": "weathered marble" },
+    { "id": "floor-to-ceiling-glass", "only": ["location"], "label": "Floor-to-ceiling glass", "phrase": "floor-to-ceiling glass" },
+    { "id": "rammed-earth", "only": ["location"], "label": "Rammed earth", "phrase": "rammed earth walls" },
+    { "id": "terrazzo", "only": ["location"], "label": "Terrazzo", "phrase": "terrazzo" }
   ],
   "surfaceFinishes": [
     { "id": "none", "label": "None", "phrase": "" },
@@ -467,11 +500,16 @@
     { "id": "tracking", "label": "Tracking / Dolly", "phrase": "Tracking / dolly move alongside the subject" },
     { "id": "whip-pan", "label": "Whip pan", "phrase": "Whip pan, a rapid horizontal blur-pan" },
     { "id": "crash-zoom", "label": "Crash zoom", "phrase": "Crash zoom into an extreme close-up" },
-    { "id": "slow-orbital-arc", "productOnly": true, "label": "Slow orbital arc", "phrase": "Slow orbital arc around the product" },
-    { "id": "linear-dolly-push-in", "productOnly": true, "label": "Linear dolly push-in", "phrase": "Linear dolly push-in toward the product" },
-    { "id": "vertical-jib-reveal", "productOnly": true, "label": "Vertical jib reveal", "phrase": "Vertical jib reveal, rising to uncover the product" },
-    { "id": "probe-lens-fly-past", "productOnly": true, "label": "Probe lens fly-past", "phrase": "Probe lens fly-past, gliding low between the props and past the product" },
-    { "id": "top-down-slow-tilt-down", "productOnly": true, "label": "Top-down slow tilt-down", "phrase": "Top-down slow tilt-down onto the product" }
+    { "id": "slow-orbital-arc", "only": ["prop"], "label": "Slow orbital arc", "phrase": "Slow orbital arc around the product" },
+    { "id": "linear-dolly-push-in", "only": ["prop"], "label": "Linear dolly push-in", "phrase": "Linear dolly push-in toward the product" },
+    { "id": "vertical-jib-reveal", "only": ["prop"], "label": "Vertical jib reveal", "phrase": "Vertical jib reveal, rising to uncover the product" },
+    { "id": "probe-lens-fly-past", "only": ["prop"], "label": "Probe lens fly-past", "phrase": "Probe lens fly-past, gliding low between the props and past the product" },
+    { "id": "top-down-slow-tilt-down", "only": ["prop"], "label": "Top-down slow tilt-down", "phrase": "Top-down slow tilt-down onto the product" },
+    { "id": "drone-flyover", "only": ["location"], "label": "Drone flyover", "phrase": "Smooth drone flyover across the location" },
+    { "id": "slow-aerial-reveal", "only": ["location"], "label": "Slow aerial reveal", "phrase": "Slow aerial rise revealing the full location" },
+    { "id": "slow-dolly-through-the-space", "only": ["location"], "label": "Slow dolly through the space", "phrase": "Slow dolly moving through the space" },
+    { "id": "slow-pan-across-the-vista", "only": ["location"], "label": "Slow pan across the vista", "phrase": "Slow horizontal pan across the vista" },
+    { "id": "time-lapse-lock-off", "only": ["location"], "label": "Time-lapse lock-off", "phrase": "Camera locked off for a time-lapse, only light and weather moving" }
   ],
   "makeupLooks": [
     { "id": "none", "label": "None", "phrase": "" },
@@ -514,11 +552,11 @@
   ],
   "colorGrades": [
     { "id": "none", "label": "None", "phrase": "" },
-    { "id": "raw-skin", "noProduct": true, "label": "Raw uncorrected skin", "phrase": "no colour correction, raw editorial skin truth" },
+    { "id": "raw-skin", "hide": ["prop", "location"], "label": "Raw uncorrected skin", "phrase": "no colour correction, raw editorial skin truth" },
     { "id": "warm-editorial", "label": "Warm editorial", "phrase": "warm editorial grade: umber shadows, honeyed midtones, creamy highlights" },
     { "id": "analogue-grain", "label": "Analogue grain", "phrase": "slight analogue grain overlay, filmic texture" },
     { "id": "portra", "label": "Kodak Portra-like", "phrase": "Kodak Portra-like colour palette, lifted skin, gentle film simulation" },
-    { "id": "lifted-beauty", "noProduct": true, "label": "Lifted-shadow beauty", "phrase": "lifted shadows, honey toning in midtones, luminous highlights" },
+    { "id": "lifted-beauty", "hide": ["prop", "location"], "label": "Lifted-shadow beauty", "phrase": "lifted shadows, honey toning in midtones, luminous highlights" },
     { "id": "teal-orange", "label": "Teal-orange cinema", "phrase": "teal-orange cinematic grade, cool shadows against warm skin" }
   ],
   "faceShapes": [
@@ -760,10 +798,14 @@
   ],
   "apertures": [
     { "id": "none", "label": "None", "phrase": "" },
-    { "id": "f-2-8-4-mood", "label": "f/2.8–4 (mood)", "phrase": "shot at f/2.8, single-point focus with the surrounding props melting into smooth bokeh" },
-    { "id": "f-8-11-e-commerce-standard", "label": "f/8–11 (e-commerce standard)", "phrase": "shot at f/8, edge-to-edge sharpness across the packaging and label" },
-    { "id": "f-16-prop-groupings", "label": "f/16 (prop groupings)", "phrase": "shot at f/16, deep focus across props at different distances" },
-    { "id": "f-5-6-8-focus-stack", "label": "f/5.6–8 (focus stack)", "phrase": "focus-stacked at f/5.6, front-to-back sharpness with no blur" }
+    { "id": "f-2-8-4-mood", "only": ["prop"], "label": "f/2.8–4 (mood)", "phrase": "shot at f/2.8, single-point focus with the surrounding props melting into smooth bokeh" },
+    { "id": "f-8-11-e-commerce-standard", "only": ["prop"], "label": "f/8–11 (e-commerce standard)", "phrase": "shot at f/8, edge-to-edge sharpness across the packaging and label" },
+    { "id": "f-16-prop-groupings", "only": ["prop"], "label": "f/16 (prop groupings)", "phrase": "shot at f/16, deep focus across props at different distances" },
+    { "id": "f-5-6-8-focus-stack", "only": ["prop"], "label": "f/5.6–8 (focus stack)", "phrase": "focus-stacked at f/5.6, front-to-back sharpness with no blur" },
+    { "id": "loc-f2-8", "only": ["location"], "label": "f/2.8–4 (texture detail)", "phrase": "shot at f/2.8, shallow depth of field isolating the material texture with creamy bokeh" },
+    { "id": "loc-f5-6", "only": ["location"], "label": "f/5.6–8 (interiors)", "phrase": "shot at f/8, every room detail and texture crisp" },
+    { "id": "loc-f8", "only": ["location"], "label": "f/8–11 (landscapes)", "phrase": "shot at f/8, razor-sharp focus from foreground to horizon" },
+    { "id": "loc-f16", "only": ["location"], "label": "f/16 (maximum depth)", "phrase": "shot at f/16, maximum depth of field" }
   ],
   "productTypes": [
     { "id": "none", "label": "None", "phrase": "" },
@@ -844,16 +886,63 @@
   ],
   "envMotions": [
     { "id": "none", "label": "None", "phrase": "" },
-    { "id": "water-ripples-expanding", "label": "Water ripples expanding", "phrase": "water ripples gently expanding" },
-    { "id": "light-beam-sweeping", "label": "Light beam sweeping", "phrase": "a light beam sweeping across the surface" },
-    { "id": "cream-slowly-oozing", "label": "Cream slowly oozing", "phrase": "liquid cream slowly oozing" },
-    { "id": "droplets-sliding", "label": "Droplets sliding", "phrase": "droplets sliding down the bottle wall" }
+    { "id": "water-ripples-expanding", "only": ["prop"], "label": "Water ripples expanding", "phrase": "water ripples gently expanding" },
+    { "id": "light-beam-sweeping", "only": ["prop"], "label": "Light beam sweeping", "phrase": "a light beam sweeping across the surface" },
+    { "id": "cream-slowly-oozing", "only": ["prop"], "label": "Cream slowly oozing", "phrase": "liquid cream slowly oozing" },
+    { "id": "droplets-sliding", "only": ["prop"], "label": "Droplets sliding", "phrase": "droplets sliding down the bottle wall" },
+    { "id": "clouds-drifting", "only": ["location"], "label": "Clouds drifting", "phrase": "clouds drifting slowly across the sky" },
+    { "id": "waves-breaking", "only": ["location"], "label": "Waves breaking", "phrase": "ocean waves breaking below" },
+    { "id": "trees-swaying", "only": ["location"], "label": "Trees swaying", "phrase": "trees and grasses swaying in the wind" },
+    { "id": "mist-rolling", "only": ["location"], "label": "Mist rolling", "phrase": "mist rolling low across the ground" },
+    { "id": "rain-falling", "only": ["location"], "label": "Rain falling", "phrase": "rain falling steadily" },
+    { "id": "light-shifting-across-the-room", "only": ["location"], "label": "Light shifting across the room", "phrase": "sunlight shifting slowly across the room" },
+    { "id": "curtains-moving", "only": ["location"], "label": "Curtains moving", "phrase": "sheer curtains moving in a light breeze" }
   ],
   "frameRates": [
     { "id": "none", "label": "None", "phrase": "" },
     { "id": "120fps-ultra-slow-motion", "label": "120fps ultra slow-motion", "phrase": "120fps ultra slow-motion" },
     { "id": "cinematic-24fps", "label": "Cinematic 24fps", "phrase": "cinematic 24fps frame rate" },
-    { "id": "deliberate-luxury-pacing", "label": "Deliberate luxury pacing", "phrase": "deliberate luxury pacing, fluid movement" }
+    { "id": "deliberate-luxury-pacing", "label": "Deliberate luxury pacing", "phrase": "deliberate luxury pacing, fluid movement" },
+    { "id": "time-lapse", "label": "Time-lapse", "phrase": "time-lapse, hours compressed into seconds" }
+  ],
+  "locationTypes": [
+    { "id": "outdoor-landscape-vista", "label": "Outdoor landscape & vista", "phrase": "an outdoor landscape and grand vista" },
+    { "id": "interior-architectural-space", "label": "Interior & architectural space", "phrase": "an indoor architectural interior" },
+    { "id": "exterior-architecture", "label": "Exterior architecture", "phrase": "an exterior architectural view" },
+    { "id": "urban-street", "label": "Urban street", "phrase": "an urban street" },
+    { "id": "material-detail-close-up", "label": "Material detail close-up", "phrase": "a close-up of material details" }
+  ],
+  "geometries": [
+    { "id": "none", "label": "None", "phrase": "" },
+    { "id": "straight-verticals-no-distortion", "label": "Straight verticals, no distortion", "phrase": "straight vertical lines, zero barrel distortion, no keystoning" },
+    { "id": "clean-geometric-symmetry", "label": "Clean geometric symmetry", "phrase": "clean geometric symmetry" },
+    { "id": "leading-lines-into-depth", "label": "Leading lines into depth", "phrase": "strong leading lines drawing the eye into the depth of the frame" },
+    { "id": "layered-foreground-to-horizon", "label": "Layered foreground to horizon", "phrase": "clear foreground, midground and background layers with massive spatial depth" },
+    { "id": "horizon-on-the-lower-third", "label": "Horizon on the lower third", "phrase": "the horizon placed on the lower third" }
+  ],
+  "seasons": [
+    { "id": "none", "label": "None", "phrase": "" },
+    { "id": "spring-bloom", "label": "Spring bloom", "phrase": "spring, fresh growth and blossoms" },
+    { "id": "high-summer", "label": "High summer", "phrase": "high summer, lush and green" },
+    { "id": "autumn-foliage", "label": "Autumn foliage", "phrase": "autumn, warm turning foliage" },
+    { "id": "winter", "label": "Winter", "phrase": "winter, bare branches and frost" }
+  ],
+  "foregrounds": [
+    { "id": "none", "label": "None", "phrase": "" },
+    { "id": "wild-grasses", "label": "Wild grasses", "phrase": "wild grasses in the near foreground" },
+    { "id": "rocks", "label": "Rocks", "phrase": "rocks in the near foreground" },
+    { "id": "still-water-reflection", "label": "Still water reflection", "phrase": "still water in the foreground reflecting the scene" },
+    { "id": "window-frame", "label": "Window frame", "phrase": "framed through a window" },
+    { "id": "overhanging-foliage", "label": "Overhanging foliage", "phrase": "framed by overhanging foliage" },
+    { "id": "doorway", "label": "Doorway", "phrase": "framed through a doorway" }
+  ],
+  "locationConditions": [
+    { "id": "none", "label": "None", "phrase": "" },
+    { "id": "pristine", "label": "Pristine", "phrase": "pristine and newly finished" },
+    { "id": "lived-in", "label": "Lived-in", "phrase": "lived-in, with signs of daily use" },
+    { "id": "weathered", "label": "Weathered", "phrase": "weathered by time and elements" },
+    { "id": "abandoned", "label": "Abandoned", "phrase": "abandoned, dust and debris settled" },
+    { "id": "ruined", "label": "Ruined", "phrase": "ruined, partly collapsed" }
   ],
   "skinSurfaces": [
     { "id": "none", "label": "None (realism block only)", "phrase": "" },
@@ -868,6 +957,10 @@
   "productRealismBlock": "Product realism: crisp label typography in sharp focus, pinpoint focal clarity, true-to-life colour of the packaging and its contents, accurate material reflections on glass, plastic and metal. Tangible micro-textures on fabrics, crisp stitching, and natural fabric creases.",
   "exclusionsProductImage": "Keep people, stray hands, warped or misspelled label text, melted or distorted packaging, and cartoonish rendering out of the frame.",
   "exclusionsProductVideo": "Keep people, stray hands, warped or misspelled label text, melted or distorted packaging, and cartoonish rendering out of the frame. Do not let the product change shape, colour or label between stages. Do not let props vanish between stages.",
+  "locationRealismBlock": "Location realism: straight vertical lines and zero barrel distortion, authentic physical textures with organic micro-detail, high dynamic range, natural light falloff, true-to-life scale.",
+  "exclusionsLocationImage": "Keep bent or warped architectural lines, fisheye or barrel distortion, melted or floating structures, garbled signage, and cartoonish rendering out of the frame.",
+  "exclusionsLocationVideo": "Keep bent or warped architectural lines, fisheye or barrel distortion, melted or floating structures, garbled signage, and cartoonish rendering out of the frame. Do not let buildings, landmarks or terrain shift or morph between stages.",
+  "subjectRealismBlock": "Realism: physically plausible anatomy and materials, fine surface micro-texture on skin, fur, scales or metal as fitting, natural light interaction, true-to-life scale.",
   "realismBlock": "Eyes show fine iris fibers, subtle color variation around the pupil, individual eyelashes, faint veins in the sclera, natural moisture along the waterline, one small realistic catchlight in each eye. Brows show visible individual hairs. Lips have natural lip texture. Skin: natural skin texture, matte with fine natural pore texture at the nose and forehead, realistic pores, subtle peach fuzz, uneven skin tone, faint freckles over the nose bridge, subtle imperfections, soft highlights, minimal makeup and untouched skin, unretouched photo. Hair shows individual strands with natural flyaways, soft frizz, and subtle baby hairs at the hairline, with healthy but imperfect texture and light reflecting through it rather than a flat CGI sheen. Tangible micro-textures on fabrics, crisp stitching, and natural fabric creases.",
   "exclusionsImage": "Keep extra people, disembodied hands, extra limbs, plastic skin, beauty filters, and cartoonish rendering out of the frame.",
   "exclusionsVideo": "Keep extra people, disembodied hands, extra limbs, plastic skin, beauty filters, and cartoonish rendering out of the frame. Do not isolate movement to only the head or face. Do not let props vanish between stages. If more than one person is present, they must not react identically."

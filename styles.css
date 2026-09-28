@@ -808,8 +808,14 @@ legend .mi {
 .feature[data-set="nose"] { --set: #f472b6; }
 .feature[data-set="mouth"] { --set: #a78bfa; }
 
-/* Product/Props mode: hide human-only fields, show product-only ones. */
-body[data-kind="prop"] .no-product,
-body:not([data-kind="prop"]) .product-only {
+/* Kind-specific fields: data-only="prop location" shows only for those kinds; data-hide="prop" hides for them. */
+body[data-kind="character"] [data-only]:not([data-only~="character"]),
+body[data-kind="scene"] [data-only]:not([data-only~="scene"]),
+body[data-kind="prop"] [data-only]:not([data-only~="prop"]),
+body[data-kind="location"] [data-only]:not([data-only~="location"]),
+body[data-kind="character"] [data-hide~="character"],
+body[data-kind="scene"] [data-hide~="scene"],
+body[data-kind="prop"] [data-hide~="prop"],
+body[data-kind="location"] [data-hide~="location"] {
   display: none;
 }

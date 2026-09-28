@@ -90,11 +90,11 @@
               <span>Shot framing</span>
               <select id="crop"></select>
             </label>
-            <label class="stack no-product">
+            <label class="stack" data-hide="prop location">
               <span>Body view</span>
               <select id="angle"></select>
             </label>
-            <label class="stack product-only">
+            <label class="stack" data-only="prop">
               <span>Product view</span>
               <select id="productView"></select>
             </label>
@@ -114,7 +114,7 @@
               <span>Depth of field</span>
               <select id="dof"></select>
             </label>
-            <label class="stack product-only">
+            <label class="stack" data-only="prop location">
               <span>Aperture</span>
               <select id="aperture"></select>
             </label>
@@ -138,7 +138,7 @@
               <span>Aesthetic &amp; genre</span>
               <select id="style"></select>
             </label>
-            <label class="stack no-product">
+            <label class="stack" data-hide="prop">
               <span>Headcount</span>
               <select id="headcount"></select>
             </label>
@@ -161,9 +161,13 @@
               <select id="colorPalette"></select>
             </label>
             <label class="stack">
-              <span class="no-product">Material &amp; fabric</span>
-              <span class="product-only">Material</span>
+              <span data-hide="prop location">Material &amp; fabric</span>
+              <span data-only="prop location">Material</span>
               <select id="surfaceMaterial"></select>
+            </label>
+            <label class="stack" data-only="location">
+              <span>Accent material</span>
+              <select id="accentMaterial"></select>
             </label>
             <label class="stack">
               <span>Surface finish</span>
@@ -189,13 +193,14 @@
         <fieldset class="mod mod-identity" id="identityFields">
           <legend><span class="mi" aria-hidden="true">person</span>Subject &amp; identity</legend>
           <div class="grid">
-            <label class="stack no-product">
+            <label class="stack" data-hide="prop location">
               <span>Entity type</span>
               <select id="entityType"></select>
             </label>
             <label class="stack">
-              <span class="no-product">Name</span>
-              <span class="product-only">Product name</span>
+              <span data-hide="prop location">Name</span>
+              <span data-only="prop">Product name</span>
+              <span data-only="location">Location name</span>
               <input id="name" type="text" placeholder="Optional" />
             </label>
           </div>
@@ -372,13 +377,9 @@
         <fieldset class="mod mod-prop" id="propFields" hidden>
           <legend><span class="mi" aria-hidden="true">inventory_2</span>Product/Props</legend>
           <div class="grid">
-            <label class="stack product-only">
+            <label class="stack" data-only="prop">
               <span>Product type</span>
               <select id="productType"></select>
-            </label>
-            <label class="stack">
-              <span>Scale in frame</span>
-              <select id="propScale"></select>
             </label>
             <label class="stack">
               <span>Condition</span>
@@ -388,36 +389,36 @@
               <span>Held by</span>
               <select id="heldBy"></select>
             </label>
-            <label class="stack product-only">
+            <label class="stack" data-only="prop">
               <span>Product finish</span>
               <select id="productFinish"></select>
             </label>
-            <label class="stack product-only">
+            <label class="stack" data-only="prop">
               <span>Surface / riser</span>
               <select id="surfaceRiser"></select>
             </label>
-            <label class="stack product-only">
+            <label class="stack" data-only="prop">
               <span>Supporting props</span>
               <select id="supportProp"></select>
             </label>
-            <label class="stack product-only">
+            <label class="stack" data-only="prop">
               <span>Styling effect</span>
               <select id="stylingEffect"></select>
             </label>
-            <label class="stack product-only">
+            <label class="stack" data-only="prop">
               <span>Composition</span>
               <select id="composition"></select>
             </label>
-            <label class="stack product-only">
+            <label class="stack" data-only="prop">
               <span>Shadow style</span>
               <select id="shadowStyle"></select>
             </label>
-            <label class="stack product-only">
+            <label class="stack" data-only="prop">
               <span>Reflection</span>
               <select id="reflection"></select>
             </label>
           </div>
-          <label class="stack no-product">
+          <label class="stack" data-hide="prop">
             <span>Owner name</span>
             <input id="propOwner" type="text" placeholder="Who is holding it, if anyone" />
           </label>
@@ -427,14 +428,27 @@
           <legend><span class="mi" aria-hidden="true">location_on</span>Location</legend>
           <div class="grid">
             <label class="stack">
-              <span>Scale</span>
-              <select id="locationScale"></select>
+              <span>Location shot type</span>
+              <select id="locationType"></select>
+            </label>
+            <label class="stack">
+              <span>Geometry</span>
+              <select id="geometry"></select>
+            </label>
+            <label class="stack">
+              <span>Season</span>
+              <select id="season"></select>
+            </label>
+            <label class="stack">
+              <span>Foreground framing</span>
+              <select id="foreground"></select>
+            </label>
+            <label class="stack">
+              <span>Condition</span>
+              <select id="locationCondition"></select>
             </label>
           </div>
-          <label class="check">
-            <input type="checkbox" id="emptyPlate" />
-            Empty plate (no people)
-          </label>
+          <p class="hint">Changing the shot type sets the camera, lens, aperture, framing and lighting from the location guide. You can still change them after.</p>
           <label class="stack">
             <span>Architecture note</span>
             <input id="architecture" type="text" placeholder="Optional" />
@@ -466,24 +480,24 @@
               <span>Camera movement</span>
               <select id="cameraMove"></select>
             </label>
-            <label class="stack product-only">
+            <label class="stack" data-only="prop location">
               <span>Environmental motion</span>
               <select id="envMotion"></select>
             </label>
-            <label class="stack product-only">
+            <label class="stack" data-only="prop location">
               <span>Frame rate &amp; pacing</span>
               <select id="frameRate"></select>
             </label>
-            <label class="stack no-product">
+            <label class="stack" data-hide="prop location">
               <span>Accent</span>
               <select id="accent"></select>
             </label>
-            <label class="stack no-product">
+            <label class="stack" data-hide="prop location">
               <span>Accent note</span>
               <input id="accentNote" type="text" placeholder="Only if Accent is Other" />
             </label>
           </div>
-          <label class="stack no-product">
+          <label class="stack" data-hide="prop location">
             <span>Dialogue</span>
             <textarea id="dialogue" rows="2" placeholder="Plain line. Braces are added for you."></textarea>
           </label>
@@ -570,11 +584,11 @@
             <span>Characteristics</span>
             <textarea id="partCharacteristics" rows="8" readonly></textarea>
           </label>
-          <label class="stack no-product">
+          <label class="stack" data-hide="prop location">
             <span>Makeup</span>
             <textarea id="partMakeup" rows="6" readonly></textarea>
           </label>
-          <label class="stack no-product">
+          <label class="stack" data-hide="prop location">
             <span>Outfit</span>
             <textarea id="partOutfit" rows="6" readonly></textarea>
           </label>
