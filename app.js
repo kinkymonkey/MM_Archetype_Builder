@@ -38,6 +38,11 @@
     entityType: "person",
     faceNotes: "",
     faceShape: "none",
+    cheekPosition: "none",
+    cheekDefinition: "none",
+    jawShape: "none",
+    jawDefinition: "none",
+    jawWidth: "none",
     eyeShape: "none",
     eyeColor: "none",
     browShape: "none",
@@ -426,6 +431,11 @@
       ethnicity: val("ethnicity"),
       faceNotes: val("faceNotes"),
       faceShape: val("faceShape"),
+      cheekPosition: val("cheekPosition"),
+      cheekDefinition: val("cheekDefinition"),
+      jawShape: val("jawShape"),
+      jawDefinition: val("jawDefinition"),
+      jawWidth: val("jawWidth"),
       eyeShape: val("eyeShape"),
       eyeColor: val("eyeColor"),
       browShape: val("browShape"),
@@ -954,6 +964,11 @@
     fillSelect(el("hairLength"), catalogs.hairLengths, defaults.hairLength);
     fillSelect(el("hairStyle"), catalogs.hairStyles, defaults.hairStyle);
     fillSelect(el("faceShape"), catalogs.faceShapes, defaults.faceShape);
+    fillSelect(el("cheekPosition"), catalogs.cheekPositions, defaults.cheekPosition);
+    fillSelect(el("cheekDefinition"), catalogs.cheekDefinitions, defaults.cheekDefinition);
+    fillSelect(el("jawShape"), catalogs.jawShapes, defaults.jawShape);
+    fillSelect(el("jawDefinition"), catalogs.jawDefinitions, defaults.jawDefinition);
+    fillSelect(el("jawWidth"), catalogs.jawWidths, defaults.jawWidth);
     fillSelect(el("eyeShape"), catalogs.eyeShapes, defaults.eyeShape);
     fillSelect(el("eyeColor"), catalogs.eyeColors, defaults.eyeColor);
     fillSelect(el("browShape"), catalogs.browShapes, defaults.browShape);

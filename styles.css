@@ -801,6 +801,8 @@ legend .mi {
   color: var(--set);
 }
 .feature[data-set="face"] { --set: #fbbf24; }
+.feature[data-set="cheeks"] { --set: #f87171; }
+.feature[data-set="jaw"] { --set: #a3e635; }
 .feature[data-set="eyes"] { --set: #38bdf8; }
 .feature[data-set="brows"] { --set: #34d399; }
 .feature[data-set="nose"] { --set: #f472b6; }

@@ -203,6 +203,22 @@
     var c = state.catalogs;
     var parts = [
       ["Face shape", phrase(c.faceShapes, state.faceShape)],
+      [
+        "Cheekbones",
+        [phrase(c.cheekPositions, state.cheekPosition), phrase(c.cheekDefinitions, state.cheekDefinition)]
+          .filter(Boolean)
+          .join("; "),
+      ],
+      [
+        "Jawline",
+        [
+          phrase(c.jawShapes, state.jawShape),
+          phrase(c.jawDefinitions, state.jawDefinition),
+          phrase(c.jawWidths, state.jawWidth),
+        ]
+          .filter(Boolean)
+          .join("; "),
+      ],
       ["Eye shape", phrase(c.eyeShapes, state.eyeShape)],
       ["Eye color", phrase(c.eyeColors, state.eyeColor)],
       [

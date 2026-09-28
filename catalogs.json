@@ -574,6 +574,51 @@
     { "id": "delicate-nostrils", "group": "Nostril Features", "label": "Delicate nostrils", "phrase": "delicate nostrils" },
     { "id": "deeply-set-nostrils", "group": "Nostril Features", "label": "Deeply set nostrils", "phrase": "deeply set nostrils" }
   ],
+  "cheekPositions": [
+    { "id": "none", "label": "None", "phrase": "" },
+    { "id": "high", "label": "High", "phrase": "high" },
+    { "id": "set-slightly-high", "label": "Set slightly high", "phrase": "set slightly high" },
+    { "id": "mid-set", "label": "Mid-set", "phrase": "mid-set" },
+    { "id": "low", "label": "Low", "phrase": "low" },
+    { "id": "wide-set", "label": "Wide-set", "phrase": "wide-set" },
+    { "id": "narrow-set", "label": "Narrow-set", "phrase": "narrow-set" }
+  ],
+  "cheekDefinitions": [
+    { "id": "none", "label": "None", "phrase": "" },
+    { "id": "prominent", "label": "Prominent", "phrase": "prominent" },
+    { "id": "sharp", "label": "Sharp", "phrase": "sharp" },
+    { "id": "sculpted", "label": "Sculpted", "phrase": "sculpted" },
+    { "id": "softly-defined", "label": "Softly defined", "phrase": "softly defined" },
+    { "id": "subtle", "label": "Subtle", "phrase": "subtle" },
+    { "id": "rounded", "label": "Rounded", "phrase": "rounded" },
+    { "id": "flat", "label": "Flat", "phrase": "flat" }
+  ],
+  "jawShapes": [
+    { "id": "none", "label": "None", "phrase": "" },
+    { "id": "square", "label": "Square", "phrase": "square" },
+    { "id": "rounded", "label": "Rounded", "phrase": "rounded" },
+    { "id": "v-shaped", "label": "V-shaped", "phrase": "v-shaped" },
+    { "id": "tapered", "label": "Tapered", "phrase": "tapered" },
+    { "id": "angular", "label": "Angular", "phrase": "angular" },
+    { "id": "soft", "label": "Soft", "phrase": "soft" },
+    { "id": "straight", "label": "Straight", "phrase": "straight" }
+  ],
+  "jawDefinitions": [
+    { "id": "none", "label": "None", "phrase": "" },
+    { "id": "sharp", "label": "Sharp", "phrase": "sharp" },
+    { "id": "chiseled", "label": "Chiseled", "phrase": "chiseled" },
+    { "id": "strong", "label": "Strong", "phrase": "strong" },
+    { "id": "defined-with-clean-angles-at-the-corners", "label": "Defined with clean angles at the corners", "phrase": "defined with clean angles at the corners" },
+    { "id": "softly-defined", "label": "Softly defined", "phrase": "softly defined" },
+    { "id": "subtle", "label": "Subtle", "phrase": "subtle" }
+  ],
+  "jawWidths": [
+    { "id": "none", "label": "None", "phrase": "" },
+    { "id": "wide", "label": "Wide", "phrase": "wide" },
+    { "id": "broad", "label": "Broad", "phrase": "broad" },
+    { "id": "narrow", "label": "Narrow", "phrase": "narrow" },
+    { "id": "slim", "label": "Slim", "phrase": "slim" }
+  ],
   "mouths": [
     { "id": "none", "group": "Skip", "label": "None", "phrase": "" },
     { "id": "wide", "group": "Size & Scale", "label": "Wide", "phrase": "wide" },
