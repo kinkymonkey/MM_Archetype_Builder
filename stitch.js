@@ -126,12 +126,12 @@
     if (variant === "forward" || state.angle === "back") {
       return ensureSentence(
         base +
-          ", swept forward over the shoulders and gathered to the front of the body so the entire back, neck, and shoulders stay bare and clearly visible"
+          ", all of it swept forward over one shoulder, gathered to that side and falling down the front; the opposite shoulder and side of the neck fully clear and visible"
       );
     }
     return ensureSentence(
       base +
-        ", swept behind the shoulders and falling smoothly down the back so the front of the chest and collarbone stay clear and visible"
+        ", all of it tucked behind the shoulders and ears; front of chest and collarbone fully clear and visible"
     );
   }
 
@@ -786,7 +786,7 @@
       add(
         state.skinSurface && state.skinSurface !== "none",
         "Skin surface is set.",
-        "Skin surface is None. Optional sheen / dewy / matte."
+        "Skin surface is None. Optional bare matte."
       );
     }
 

@@ -500,8 +500,6 @@
   ],
   "skinSurfaces": [
     { "id": "none", "label": "None (realism block only)", "phrase": "" },
-    { "id": "natural-sheen", "label": "Natural sebum sheen", "phrase": "Skin finish: natural sebum sheen — not wet, not dry — the luminosity of healthy skin in directional light, no powder, no matte airbrush." },
-    { "id": "dewy-mist", "label": "Dewy mist droplets", "phrase": "Skin finish: dewy, with individual micro-droplets of moisture catching the key as tiny specular highlights." },
     { "id": "bare-matte", "label": "Bare matte (unpowdered)", "phrase": "Skin finish: unpowdered matte, pores still visible, no cake, no beauty filter." }
   ],
   "accents": [
@@ -510,7 +508,7 @@
     { "id": "filipino", "label": "Filipino English", "phrase": "fluent English with a Filipino accent" },
     { "id": "other", "label": "Other (use Accent note)", "phrase": "fluent English" }
   ],
-  "realismBlock": "Ultra-realistic skin texture: visible pores, follicle marks, fine peach fuzz and vellus hair catching the light unevenly across the visible skin, subtle natural color variation, faint freckling, and soft micro-imperfections rather than airbrushed smoothness. Hair shows individual strands with natural flyaways, soft frizz, and subtle baby hairs at the hairline, with healthy but imperfect texture and light reflecting through it rather than a flat CGI sheen. Eyes with natural catchlights, subtle moisture, realistic iris striation, and authentic sclera tone. Tangible micro-textures on fabrics, crisp stitching, and natural fabric creases.",
+  "realismBlock": "Eyes show fine iris fibers, subtle color variation around the pupil, individual eyelashes, faint veins in the sclera, natural moisture along the waterline, one small realistic catchlight in each eye. Brows show visible individual hairs. Lips have natural lip texture. Skin: natural skin texture, matte with fine natural pore texture at the nose and forehead, realistic pores, subtle peach fuzz, uneven skin tone, faint freckles over the nose bridge, subtle imperfections, soft highlights, minimal makeup and untouched skin, unretouched photo. Hair shows individual strands with natural flyaways, soft frizz, and subtle baby hairs at the hairline, with healthy but imperfect texture and light reflecting through it rather than a flat CGI sheen. Tangible micro-textures on fabrics, crisp stitching, and natural fabric creases.",
   "exclusionsImage": "Keep extra people, disembodied hands, extra limbs, plastic skin, beauty filters, and cartoonish rendering out of the frame.",
   "exclusionsVideo": "Keep extra people, disembodied hands, extra limbs, plastic skin, beauty filters, and cartoonish rendering out of the frame. Do not isolate movement to only the head or face. Do not let props vanish between stages. If more than one person is present, they must not react identically."
 }
