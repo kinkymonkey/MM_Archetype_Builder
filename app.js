@@ -64,6 +64,18 @@
     condition: "worn",
     heldBy: "nobody",
     propOwner: "",
+    aperture: "none",
+    productType: "none",
+    productView: "none",
+    productFinish: "none",
+    surfaceRiser: "none",
+    supportProp: "none",
+    stylingEffect: "none",
+    composition: "none",
+    shadowStyle: "none",
+    reflection: "none",
+    envMotion: "none",
+    frameRate: "none",
     locationScale: "street",
     emptyPlate: false,
     architecture: "",
@@ -100,7 +112,10 @@
   }
 
   function fillSelect(select, items, value) {
-    items = items || [];
+    var product = val("kind") === "prop";
+    items = (items || []).filter(function (item) {
+      return product ? !item.noProduct : !item.productOnly;
+    });
     var hasSkip = items.some(function (item) {
       return item.id === "none" || item.id === "";
     });
@@ -258,13 +273,16 @@
       prop: {
         format: video ? "commercial" : "lookbook",
         size: "1-1",
-        crop: "close-up",
+        crop: "product-close-up",
         angle: "front",
+        productView: "front-label",
         cameraAngle: "eye-level",
-        camera: video ? "cinema-35" : "phase-one",
-        lens: "50mm",
-        dof: "shallow",
-        lighting: "softbox",
+        camera: video ? "sony-fx3-video" : "sony-a7r-v",
+        lens: "90-105mm-macro-f-2-8",
+        dof: "deep",
+        aperture: "f-8-11-e-commerce-standard",
+        composition: "single-hero-centered",
+        lighting: "softbox-key-from-camera-left",
         studioBackground: "white",
         entityType: "object",
         headcount: "0",
@@ -273,7 +291,7 @@
         colorTemp: "5600k",
         heldBy: "nobody",
         propScale: "hero",
-        condition: "worn",
+        condition: "new",
         emptyPlate: false,
       },
       location: {
@@ -314,7 +332,25 @@
     node.value = value;
   }
 
+  var KIND_FILTERED = {
+    crop: "crops",
+    camera: "cameras",
+    lens: "lenses",
+    lighting: "lighting",
+    colorGrade: "colorGrades",
+    studioBackground: "studioBackgrounds",
+    style: "styles",
+    cameraMove: "cameraMoves",
+  };
+
+  function syncKindOptions() {
+    Object.keys(KIND_FILTERED).forEach(function (id) {
+      fillSelect(el(id), catalogs[KIND_FILTERED[id]], val(id));
+    });
+  }
+
   function applyKindPreset(kind) {
+    syncKindOptions();
     syncFormatSelect();
     syncHeadcountSelect();
     var preset = kindPreset(kind, val("medium"));
@@ -430,6 +466,18 @@
       name: val("name"),
       ethnicity: val("ethnicity"),
       faceNotes: val("faceNotes"),
+      aperture: val("aperture"),
+      productType: val("productType"),
+      productView: val("productView"),
+      productFinish: val("productFinish"),
+      surfaceRiser: val("surfaceRiser"),
+      supportProp: val("supportProp"),
+      stylingEffect: val("stylingEffect"),
+      composition: val("composition"),
+      shadowStyle: val("shadowStyle"),
+      reflection: val("reflection"),
+      envMotion: val("envMotion"),
+      frameRate: val("frameRate"),
       faceShape: val("faceShape"),
       cheekPosition: val("cheekPosition"),
       cheekDefinition: val("cheekDefinition"),
@@ -716,6 +764,8 @@
     if (fields.medium) setField("medium", fields.medium);
     syncFormatSelect();
     if (fields.kind) setField("kind", fields.kind);
+    syncKindOptions();
+    syncFormatSelect();
     syncHeadcountSelect();
     Object.keys(fields).forEach(function (id) {
       if (id === "medium" || id === "kind") return;
@@ -963,6 +1013,18 @@
     fillSelect(el("physique"), catalogs.physiques, defaults.physique);
     fillSelect(el("hairLength"), catalogs.hairLengths, defaults.hairLength);
     fillSelect(el("hairStyle"), catalogs.hairStyles, defaults.hairStyle);
+    fillSelect(el("aperture"), catalogs.apertures, defaults.aperture);
+    fillSelect(el("productType"), catalogs.productTypes, defaults.productType);
+    fillSelect(el("productView"), catalogs.productViews, defaults.productView);
+    fillSelect(el("productFinish"), catalogs.productFinishes, defaults.productFinish);
+    fillSelect(el("surfaceRiser"), catalogs.surfaceRisers, defaults.surfaceRiser);
+    fillSelect(el("supportProp"), catalogs.supportProps, defaults.supportProp);
+    fillSelect(el("stylingEffect"), catalogs.stylingEffects, defaults.stylingEffect);
+    fillSelect(el("composition"), catalogs.compositions, defaults.composition);
+    fillSelect(el("shadowStyle"), catalogs.shadowStyles, defaults.shadowStyle);
+    fillSelect(el("reflection"), catalogs.reflections, defaults.reflection);
+    fillSelect(el("envMotion"), catalogs.envMotions, defaults.envMotion);
+    fillSelect(el("frameRate"), catalogs.frameRates, defaults.frameRate);
     fillSelect(el("faceShape"), catalogs.faceShapes, defaults.faceShape);
     fillSelect(el("cheekPosition"), catalogs.cheekPositions, defaults.cheekPosition);
     fillSelect(el("cheekDefinition"), catalogs.cheekDefinitions, defaults.cheekDefinition);

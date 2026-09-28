@@ -372,10 +372,45 @@
   function openingBeat(state) {
     var idea = trim(state.idea);
     if (idea) return ensureSentence(idea);
-    if (state.kind === "prop") return "The object is the focus of the shot.";
+    if (state.kind === "prop") return "The product is the focus of the shot.";
     if (state.kind === "location") return "The location fills the frame.";
     if (state.kind === "scene") return "The scene plays out in a single continuous beat.";
     return "The subject holds the frame.";
+  }
+
+  function productLine(state) {
+    var c = state.catalogs;
+    var ref = state.bindRef ? " **[INSERT PROP REF HERE]**" : "";
+    var type = phrase(c.productTypes, state.productType);
+    var name = trim(state.name);
+    var lead = "The subject is the product" + ref;
+    if (name && type) lead += ", " + name + ", " + articleFor(type) + type;
+    else if (name) lead += ", " + name;
+    else if (type) lead += ", " + articleFor(type) + type;
+    var bits = [ensureSentence(lead)];
+    var finish = phrase(c.productFinishes, state.productFinish);
+    if (finish) bits.push(ensureSentence("It is finished in " + finish));
+    var scale = phrase(c.propScales, state.propScale);
+    if (scale) bits.push(ensureSentence(scale.charAt(0).toUpperCase() + scale.slice(1)));
+    var condition = phrase(c.conditions, state.condition);
+    if (condition) bits.push(ensureSentence("Its condition is " + condition));
+    var surface = phrase(c.surfaceRisers, state.surfaceRiser);
+    if (surface) bits.push(ensureSentence("It rests on " + surface));
+    var support = phrase(c.supportProps, state.supportProp);
+    if (support) bits.push(ensureSentence("Surrounding props include " + support));
+    var effect = phrase(c.stylingEffects, state.stylingEffect);
+    if (effect) bits.push(ensureSentence("Styling detail: " + effect));
+    var shadow = phrase(c.shadowStyles, state.shadowStyle);
+    if (shadow) bits.push(ensureSentence("The light leaves " + shadow));
+    var reflection = phrase(c.reflections, state.reflection);
+    if (reflection) bits.push(ensureSentence("There is " + reflection));
+    return bits.join(" ");
+  }
+
+  function productPeopleLine(state) {
+    var held = phrase(state.catalogs.heldBy, state.heldBy);
+    if (held) return ensureSentence("The product is " + held + ", only the hands in frame, no face");
+    return "There are no people in this frame.";
   }
 
   function subjectTones(state, hairVariant) {
@@ -412,20 +447,9 @@
       return packTones(tones);
     }
     if (state.kind === "prop") {
-      var scale = phrase(state.catalogs.propScales, state.propScale);
-      var heldBy = phrase(state.catalogs.heldBy, state.heldBy);
-      var propRef = state.bindRef ? " **[INSERT PROP REF HERE]**" : "";
-      var propBits = ["The subject is the prop" + propRef + "."];
-      if (scale) propBits.push(ensureSentence(scale));
-      var condition = phrase(state.catalogs.conditions, state.condition);
-      if (condition) propBits.push(ensureSentence("Its condition is " + condition));
-      tones.push(tone("prop", propBits.join(" ")));
+      tones.push(tone("prop", productLine(state)));
       tones.push(tone("place", environmentLine(state)));
-      if (heldBy) {
-        var owner = trim(state.propOwner) || "the person in frame";
-        tones.push(tone("prop", ensureSentence(owner + " has the object " + heldBy)));
-      }
-      tones.push(tone("prop", headcountLine(state)));
+      tones.push(tone("prop", productPeopleLine(state)));
       return packTones(tones);
     }
     var locScale = phrase(state.catalogs.locationScales, state.locationScale);
@@ -457,6 +481,17 @@
   }
 
   function compositionClause(state) {
+    if (state.kind === "prop") {
+      var parts = [
+        phrase(state.catalogs.crops, state.crop),
+        phrase(state.catalogs.productViews, state.productView),
+        phrase(state.catalogs.cameraAngles, state.cameraAngle),
+      ].filter(Boolean);
+      var line = parts.length ? "The framing is a " + parts.join(", with ") + "." : "";
+      var comp = phrase(state.catalogs.compositions, state.composition);
+      if (comp) line += (line ? " " : "") + ensureSentence("The composition is " + comp);
+      return line;
+    }
     var view = phrase(state.catalogs.angles, state.angle);
     var crop = phrase(state.catalogs.crops, state.crop);
     var camAngle = phrase(state.catalogs.cameraAngles, state.cameraAngle);
@@ -469,7 +504,8 @@
     var body = phrase(state.catalogs.cameras, state.camera);
     var lens = phrase(state.catalogs.lenses, state.lens);
     var dof = phrase(state.catalogs.depthsOfField, state.dof);
-    return "The shot is taken on a " + body + " with " + lens + ", using " + dof + ".";
+    var aperture = state.kind === "prop" ? phrase(state.catalogs.apertures, state.aperture) : "";
+    return "The shot is taken on a " + body + " with " + lens + ", using " + dof + (aperture ? ", " + aperture : "") + ".";
   }
 
   function lightingClause(state) {
@@ -485,6 +521,7 @@
   }
 
   function realismClause(state) {
+    if (state.kind === "prop") return state.catalogs.productRealismBlock;
     var extra = skinSurfaceLine(state);
     if (extra) return state.catalogs.realismBlock + " " + extra;
     return state.catalogs.realismBlock;
@@ -515,6 +552,14 @@
   function exclusionsClause(state) {
     var extra = trim(state.exclusions);
     var base = state.medium === "video" ? state.catalogs.exclusionsVideo : state.catalogs.exclusionsImage;
+    if (state.kind === "prop") {
+      base = state.medium === "video" ? state.catalogs.exclusionsProductVideo : state.catalogs.exclusionsProductImage;
+      if (extra) return ensureSentence("Leave these things out of the shot. " + extra.replace(/\.$/, ""));
+      if (findItem(state.catalogs.heldBy, state.heldBy) && state.heldBy !== "nobody") {
+        base = base.replace(/^Keep people, stray hands, /, "Keep faces, extra hands, ");
+      }
+      return ensureSentence(base.replace(/\.$/, ""));
+    }
     if (state.headcount === "crowd" || (state.headcount !== "0" && Number(state.headcount) > 1)) {
       base = base.replace(/^Keep extra people, /, "Keep ");
     }
@@ -534,6 +579,16 @@
     if (state.kind === "prop") return "Reference: the prop **[INSERT PROP REF HERE]**.";
     if (state.kind === "location") return "Reference: the location **[INSERT LOCATION REF HERE]**.";
     return "Reference: **[INSERT SCENE REF HERE]**.";
+  }
+
+  function productMotionClause(state) {
+    if (state.kind !== "prop") return "";
+    var bits = [];
+    var motion = phrase(state.catalogs.envMotions, state.envMotion);
+    if (motion) bits.push(ensureSentence("Environmental motion: " + motion));
+    var rate = phrase(state.catalogs.frameRates, state.frameRate);
+    if (rate) bits.push(ensureSentence("Frame rate and pacing: " + rate));
+    return bits.join(" ");
   }
 
   function cameraMoveClause(state) {
@@ -577,7 +632,7 @@
 
   function audioClause(state) {
     var bits = [];
-    var dialogue = wrapAudio("dialogue", state.dialogue);
+    var dialogue = state.kind === "prop" ? "" : wrapAudio("dialogue", state.dialogue);
     if (dialogue) {
       var accentItem = findItem(state.catalogs.accents, state.accent);
       var accentPhrase = accentItem ? accentItem.phrase : "fluent English with a standard American accent";
@@ -603,6 +658,16 @@
   }
 
   function maintainClause(state) {
+    if (state.kind === "prop") {
+      var product = trim(state.name) || "the product";
+      return (
+        "Maintain Consistency: Keep " +
+        product +
+        "'s shape, label, colour and finish locked" +
+        (state.bindRef ? " to **[INSERT PROP REF HERE]**" : "") +
+        " throughout all stages. Surface and props stay identical."
+      );
+    }
     var name = trim(state.name) || "the subject";
     var bits = [
       "Maintain Consistency: Keep " +
@@ -647,6 +712,7 @@
           tone("craft", compositionClause(state)),
           tone("craft", cameraClause(state)),
           tone("video", cameraMoveClause(state)),
+          tone("video", productMotionClause(state)),
           tone("craft", lightingClause(state)),
           tone("craft", backgroundClause(state)),
           tone("craft", optionalSentence("The colour grade is ", state.catalogs.colorGrades, state.colorGrade)),
@@ -677,6 +743,10 @@
       var pose = poseLine(state);
       if (pose) identity.push(pose);
     }
+    if (state.kind === "prop") {
+      identity.push(productLine(state));
+      identity.push(productPeopleLine(state));
+    }
     identity.push(realismClause(state));
     identity.push(compositionClause(state));
     var characteristics = joinClauses(identity);
@@ -688,7 +758,10 @@
       environmentLine(state),
       cameraClause(state),
     ];
-    if (state.medium === "video") shot.push(cameraMoveClause(state));
+    if (state.medium === "video") {
+      shot.push(cameraMoveClause(state));
+      shot.push(productMotionClause(state));
+    }
     shot.push(lightingClause(state));
     shot.push(backgroundClause(state));
     shot.push(optionalSentence("The colour grade is ", state.catalogs.colorGrades, state.colorGrade));
@@ -814,8 +887,8 @@
     if (state.kind === "prop") {
       add(
         filled(state.idea) || filled(state.name),
-        "The object is named in Idea or Name.",
-        "Name the object in Idea so the model knows what to render."
+        "The product is named in Idea or Product name.",
+        "Name the product in Idea or Product name so the model knows what to render."
       );
     }
 

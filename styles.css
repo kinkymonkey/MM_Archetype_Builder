@@ -807,3 +807,9 @@ legend .mi {
 .feature[data-set="brows"] { --set: #34d399; }
 .feature[data-set="nose"] { --set: #f472b6; }
 .feature[data-set="mouth"] { --set: #a78bfa; }
+
+/* Product/Props mode: hide human-only fields, show product-only ones. */
+body[data-kind="prop"] .no-product,
+body:not([data-kind="prop"]) .product-only {
+  display: none;
+}
