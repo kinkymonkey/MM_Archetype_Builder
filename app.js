@@ -43,6 +43,9 @@
     browShape: "none",
     browDensity: "none",
     browTilt: "none",
+    noseShape: "none",
+    noseProportion: "none",
+    noseTip: "none",
     mouth: "none",
     lip: "none",
     hairLength: "long",
@@ -428,6 +431,9 @@
       browShape: val("browShape"),
       browDensity: val("browDensity"),
       browTilt: val("browTilt"),
+      noseShape: val("noseShape"),
+      noseProportion: val("noseProportion"),
+      noseTip: val("noseTip"),
       mouth: val("mouth"),
       lip: val("lip"),
       hairLength: val("hairLength"),
@@ -953,6 +959,9 @@
     fillSelect(el("browShape"), catalogs.browShapes, defaults.browShape);
     fillSelect(el("browDensity"), catalogs.browDensities, defaults.browDensity);
     fillSelect(el("browTilt"), catalogs.browTilts, defaults.browTilt);
+    fillSelect(el("noseShape"), catalogs.noseShapes, defaults.noseShape);
+    fillSelect(el("noseProportion"), catalogs.noseProportions, defaults.noseProportion);
+    fillSelect(el("noseTip"), catalogs.noseTips, defaults.noseTip);
     fillSelect(el("mouth"), catalogs.mouths, defaults.mouth);
     fillSelect(el("lip"), catalogs.lips, defaults.lip);
     fillSelect(el("expression"), catalogs.expressions, defaults.expression);

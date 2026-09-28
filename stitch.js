@@ -215,6 +215,16 @@
           .filter(Boolean)
           .join(", "),
       ],
+      [
+        "Nose",
+        [
+          phrase(c.noseShapes, state.noseShape),
+          phrase(c.noseProportions, state.noseProportion),
+          phrase(c.noseTips, state.noseTip),
+        ]
+          .filter(Boolean)
+          .join("; "),
+      ],
       ["Mouth", phrase(c.mouths, state.mouth)],
       ["Lips", phrase(c.lips, state.lip)],
     ];

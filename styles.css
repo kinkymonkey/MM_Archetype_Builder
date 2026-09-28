@@ -790,3 +790,18 @@ legend .mi {
     grid-template-columns: 1fr;
   }
 }
+
+/* Face feature sets: one color per set so related dropdowns read together. */
+.feature {
+  --set: var(--outline);
+  border-left: 3px solid var(--set);
+  padding-left: 0.5rem;
+}
+.feature > span {
+  color: var(--set);
+}
+.feature[data-set="face"] { --set: #fbbf24; }
+.feature[data-set="eyes"] { --set: #38bdf8; }
+.feature[data-set="brows"] { --set: #34d399; }
+.feature[data-set="nose"] { --set: #f472b6; }
+.feature[data-set="mouth"] { --set: #a78bfa; }
