@@ -199,6 +199,35 @@
     return findItem(state.catalogs.entityTypes, state.entityType) || { living: false, hair: false, phrase: "subject" };
   }
 
+  function featureLine(state) {
+    var c = state.catalogs;
+    var parts = [
+      ["Face shape", phrase(c.faceShapes, state.faceShape)],
+      ["Eye shape", phrase(c.eyeShapes, state.eyeShape)],
+      ["Eye color", phrase(c.eyeColors, state.eyeColor)],
+      [
+        "Eyebrows",
+        [
+          phrase(c.browShapes, state.browShape),
+          phrase(c.browDensities, state.browDensity),
+          phrase(c.browTilts, state.browTilt),
+        ]
+          .filter(Boolean)
+          .join(", "),
+      ],
+      ["Mouth", phrase(c.mouths, state.mouth)],
+      ["Lips", phrase(c.lips, state.lip)],
+    ];
+    return parts
+      .filter(function (part) {
+        return part[1];
+      })
+      .map(function (part) {
+        return part[0] + ": " + part[1] + ".";
+      })
+      .join(" ");
+  }
+
   function characterIdentity(state, hairVariant) {
     var meta = entityMeta(state);
     var bits = [];
@@ -238,6 +267,8 @@
       var body = physique.replace(/^(a|an)\s+/i, "");
       bits.push(ensureSentence(p.They + " " + p.have + " " + articleFor(body) + body));
     }
+    var features = featureLine(state);
+    if (features) bits.push(features);
     var face = trim(state.faceNotes);
     if (face) bits.push(ensureSentence("Facial features include " + face.replace(/\.$/, "")));
     if (meta.hair) bits.push(hairPosition(state, hairVariant));

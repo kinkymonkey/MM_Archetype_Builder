@@ -37,6 +37,14 @@
     ethnicity: "",
     entityType: "person",
     faceNotes: "",
+    faceShape: "none",
+    eyeShape: "none",
+    eyeColor: "none",
+    browShape: "none",
+    browDensity: "none",
+    browTilt: "none",
+    mouth: "none",
+    lip: "none",
     hairLength: "long",
     hairStyle: "none",
     expression: "neutral",
@@ -353,6 +361,7 @@
     show("expressionRow", !!entityItem.living && (kind === "character" || kind === "scene"));
     show("mixRow", !!entityItem.living);
     show("faceRow", !!entityItem.living && entity !== "mech");
+    show("featureFields", !!entityItem.living && entity !== "mech");
     show("skinRow", !!entityItem.living && !ethnicityItem.fantasy);
     show("outfitFields", !!entityItem.living);
     show("skinSurfaceRow", !!entityItem.living);
@@ -413,6 +422,14 @@
       name: val("name"),
       ethnicity: val("ethnicity"),
       faceNotes: val("faceNotes"),
+      faceShape: val("faceShape"),
+      eyeShape: val("eyeShape"),
+      eyeColor: val("eyeColor"),
+      browShape: val("browShape"),
+      browDensity: val("browDensity"),
+      browTilt: val("browTilt"),
+      mouth: val("mouth"),
+      lip: val("lip"),
       hairLength: val("hairLength"),
       hairStyle: val("hairStyle"),
       expression: val("expression"),
@@ -930,6 +947,14 @@
     fillSelect(el("physique"), catalogs.physiques, defaults.physique);
     fillSelect(el("hairLength"), catalogs.hairLengths, defaults.hairLength);
     fillSelect(el("hairStyle"), catalogs.hairStyles, defaults.hairStyle);
+    fillSelect(el("faceShape"), catalogs.faceShapes, defaults.faceShape);
+    fillSelect(el("eyeShape"), catalogs.eyeShapes, defaults.eyeShape);
+    fillSelect(el("eyeColor"), catalogs.eyeColors, defaults.eyeColor);
+    fillSelect(el("browShape"), catalogs.browShapes, defaults.browShape);
+    fillSelect(el("browDensity"), catalogs.browDensities, defaults.browDensity);
+    fillSelect(el("browTilt"), catalogs.browTilts, defaults.browTilt);
+    fillSelect(el("mouth"), catalogs.mouths, defaults.mouth);
+    fillSelect(el("lip"), catalogs.lips, defaults.lip);
     fillSelect(el("expression"), catalogs.expressions, defaults.expression);
     fillSelect(el("posePreset"), catalogs.posePresets, defaults.posePreset);
     fillSelect(el("makeupLook"), catalogs.makeupLooks, defaults.makeupLook);
